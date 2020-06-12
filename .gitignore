@@ -1,0 +1,16 @@
+.settings
+.classpath
+.factorypath
+.project
+.vscode
+Thumbs.db
+target
+tmp
+app-db
+logs
+node_modules
+nbactions.xml
+DOCUMENT_J.md
+*.code-workspace
+*.save
+*.orig

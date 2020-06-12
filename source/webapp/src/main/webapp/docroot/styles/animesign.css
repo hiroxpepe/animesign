@@ -1,0 +1,351 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+body {
+    font-family: 'Lato';
+    font-weight: 300;
+    font-size: 1.2em;
+    text-align: center;
+}
+button {
+    background: darkblue;
+    color: white;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 6px;
+    font-family: 'Lato';
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+button:hover {
+    background: lightslategray;
+}
+.controls {
+    float: left;
+    background: darkgray;
+    margin-top: 50px;
+    border-radius: 6px;
+    z-index: 99;
+}
+/* -------------------------------------------------------------------------- */
+.background {
+    z-index: -1;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 1920px;
+    height: 1080px;
+}
+.object {
+    pointer-events: none;
+    position: fixed;
+    opacity: 0.0;
+}
+.telop {
+    font-family: 'Lato';
+    font-size: 500%;
+    font-weight: bold;
+    width: 100%;
+    text-align: left;
+}
+/* -------------------------------------------------------------------------- */
+.chara {
+    /* リソース画像のキャラの頭部の中心を、topから25%の位置にして作成する制約がある */
+    transform-origin: 50% 25%;
+    z-index: 5;
+}
+/* -------------------------------------------------------------------------- */
+.balloon {
+    z-index: 6;
+}
+/* -------------------------------------------------------------------------- */
+.frame {
+    z-index: 10;
+}
+.back-scroll-1 {
+    z-index: 1;
+}
+.back-scroll-2 {
+    z-index: 2;
+}
+.fore-scroll-1 {
+    z-index: 11;
+}
+.fore-scroll-2 {
+    z-index: 12;
+}
+/* -------------------------------------------------------------------------- */
+.left-center-scroll-2880px-1080px {
+    left: -1920px;
+    top: 0px;
+}
+.right-center-scroll-2880px-1080px {
+    left: 0px;
+    top: 0px;
+}
+/* -------------------------------------------------------------------------- */
+.left-center-scroll-3840px-1080px {
+    left: -2880px;
+    top: 0px;
+}
+.right-center-scroll-3840px-1080px {
+    left: 0px;
+    top: 0px;
+}
+/* -------------------------------------------------------------------------- */
+.left-top-frame-5760px-3240px {
+    left: -2880px;
+    top: -1620px;
+}
+.left-center-frame-5760px-3240px {
+    left: -2880px;
+    top: -1080px;
+}
+.left-bottom-frame-5760px-3240px {
+    left: -2880px;
+    top: -540px;
+}
+.right-top-frame-5760px-3240px {
+    left: -960px;
+    top: -1620px;
+}
+.right-center-frame-5760px-3240px {
+    left: -960px;
+    top: -1080px;
+}
+.right-bottom-frame-5760px-3240px {
+    left: -960px;
+    top: -540px;
+}
+/* -------------------------------------------------------------------------- */
+/* start position of objects in (720px * 600px) */
+.left-top-720px-600px {
+    left: -360px;
+    top: -300px;
+}
+.left-center-720px-600px {
+    left: -360px;
+    top: 240px;
+}
+.left-bottom-720px-600px {
+    left: -360px;
+    top: 780px;
+}
+.center-top-720px-600px {
+    left: 600px;
+    top: -300px; 
+}
+.center-center-720px-600px {
+    left: 600px;
+    top: 240px;
+}
+.center-bottom-720px-600px {
+    left: 600px;
+    top: 780px;
+}
+.right-top-720px-600px {
+    left: 1560px;
+    top: -300px;
+}
+.right-center-720px-600px {
+    left: 1560px;
+    top: 240px;
+}
+.right-bottom-720px-600px {
+    left: 1560px;
+    top: 780px;
+}
+/* start position of objects in (1080px * 720px) */
+.left-top-1080px-720px {
+    left: -540px;
+    top: -360px;
+}
+.left-center-1080px-720px {
+    left: -540px;
+    top: 180px;
+}
+.left-bottom-1080px-720px {
+    left: -540px;
+    top: 720px;
+}
+.center-top-1080px-720px {
+    left: 420px;
+    top: -360px;
+}
+.center-center-1080px-720px {
+    left: 420px;
+    top: 180px;
+}
+.center-bottom-1080px-720px {
+    left: 420px;
+    top: 720px;
+}
+.right-top-1080px-720px {
+    left: 1380px;
+    top: -360px;
+}
+.right-center-1080px-720px {
+    left: 1380px;
+    top: 180px;
+}
+.right-bottom-1080px-720px {
+    left: 1380px;
+    top: 720px;
+}
+/* start position of objects in (1680px * 1080px) */
+.left-top-1680px-1080px {
+    left: -840px;
+    top: -540px;
+}
+.left-center-1680px-1080px {
+    left: -840px;
+    top: 0px;
+}
+.left-bottom-1680px-1080px {
+    left: -840px;
+    top: 540px;
+}
+.center-top-1680px-1080px {
+    left: 120px;
+    top: -540px;
+}
+.center-center-1680px-1080px {
+    left: 120px;
+    top: 0px;
+}
+.center-bottom-1680px-1080px {
+    left: 120px;
+    top: 540px;
+}
+.right-top-1680px-1080px {
+    left: 1080px;
+    top: -540px;
+}
+.right-center-1680px-1080px {
+    left: 1080px;
+    top: 0px;
+}
+.right-bottom-1680px-1080px {
+    left: 1080px;
+    top: 540px;
+}
+/* start position of objects in (1920px * 1080px) */
+.left-top-1920px-1080px {
+    left: -960px;
+    top: -540px;
+}
+.left-center-1920px-1080px {
+    left: -960px;
+    top: 0px;
+}
+.left-bottom-1920px-1080px {
+    left: -960px;
+    top: 540px;
+}
+.center-top-1920px-1080px {
+    left: 0px;
+    top: -540px;
+}
+.center-center-1920px-1080px {
+    left: 0px;
+    top: 0px;
+}
+.center-bottom-1920px-1080px {
+    left: 0px;
+    top: 540px;
+}
+.right-top-1920px-1080px {
+    left: 960px;
+    top: -540px;
+}
+.right-center-1920px-1080px {
+    left: 960px;
+    top: 0px;
+}
+.right-bottom-1920px-1080px {
+    left: 960px;
+    top: 540px;
+}
+/* -------------------------------------------------------------------------- */
+/* start position of objects in (720px * 960px) */
+.left-top-720px-960px {
+    left: -360px;
+    top: -480px;
+}
+.left-center-720px-960px {
+    left: -360px;
+    top: 60px;
+}
+.left-bottom-720px-960px {
+    left: -360px;
+    top: 600px;
+}
+.center-top-720px-960px {
+    left: 600px;
+    top: -480px;
+}
+.center-center-720px-960px {
+    left: 600px;
+    top: 60px;
+}
+.center-bottom-720px-960px {
+    left: 600px;
+    top: 600px;
+}
+.right-top-720px-960px {
+    left: 1560px;
+    top: -480px;
+}
+.right-center-720px-960px {
+    left: 1560px;
+    top: 60px;
+}
+.right-bottom-720px-960px {
+    left: 1560px;
+    top: 600px;
+}
+/* -------------------------------------------------------------------------- */
+/* start position of objects in (1080px * 1440px) */
+.left-top-1080px-1440px {
+    left: -540px;
+    top: -720px;
+}
+.left-center-1080px-1440px {
+    left: -540px;
+    top: -180px;
+}
+.left-bottom-1080px-1440px {
+    left: -540px;
+    top: 360px;
+}
+.center-top-1080px-1440px {
+    left: 420px;
+    top: -720px;
+}
+.center-center-1080px-1440px {
+    left: 420px;
+    top: -180px;
+}
+.center-bottom-1080px-1440px {
+    left: 420px;
+    top: 360px;
+}
+.right-top-1080px-1440px {
+    left: 1380px;
+    top: -720px;
+}
+.right-center-1080px-1440px {
+    left: 1380px;
+    top: -180px;
+}
+.right-bottom-1080px-1440px {
+    left: 1380px;
+    top: 360px;
+}
+/* -------------------------------------------------------------------------- */
+#default-background {
+}

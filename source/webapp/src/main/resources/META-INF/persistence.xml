@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+    version="2.0">
+    <persistence-unit name="animesign-pu" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <non-jta-data-source />
+        <!-- MEMO: Define your JPA entity class. -->
+        <class>com.studio.meowtoon.animesign.entity.Resource</class>
+        <class>com.studio.meowtoon.animesign.entity.Timeline</class>
+        <class>com.studio.meowtoon.animesign.entity.EasyTimeline</class>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+            <property name="hibernate.connection.pool_size" value="0"/>
+            <property name="hibernate.max_fetch_depth" value="3"/>
+            <!--<property name="hibernate.hbm2ddl.auto" value="update"/>-->
+            <property name="hibernate.hbm2ddl.auto" value="create" /><!-- load /resources/import.sql -->
+        </properties>
+    </persistence-unit>
+</persistence>

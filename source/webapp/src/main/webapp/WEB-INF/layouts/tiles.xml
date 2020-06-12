@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" 
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+    <!-- ============================================================================= -->
+    <!-- define the structure of the main-template, which is divided into each region. -->
+    <!-- ============================================================================= -->
+
+    <!-- default main template -->
+    <definition name="main-template" template="/WEB-INF/views/core/main.jsp">
+        <put-attribute name="content" value="/WEB-INF/views/core/blank.jsp" />
+    </definition>
+    
+    <!-- ============================================================================= -->
+    <!-- replace the contents of the area by the request URL                           -->
+    <!-- ============================================================================= -->
+
+    <!-- index ======================================================================= -->
+    <!-- contents of the "content" you access http://[your domain]/index.html -->
+    <definition name="index" extends="main-template">
+        <put-attribute name="content" value="/WEB-INF/views/index.jsp" />
+    </definition>
+    
+    <!-- edit ======================================================================= -->
+    <!-- contents of the "content" you access http://[your domain]/edit/chunk.html -->
+    <definition name="edit/chunk" extends="main-template">
+        <put-attribute name="content" value="/WEB-INF/views/edit/chunk.jsp" />
+    </definition>
+    
+</tiles-definitions>
