@@ -17,57 +17,54 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name="easy_timeline")
+@Table(name="easy_timelines")
 public class EasyTimeline implements Serializable {
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // Field
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true)
-    private Long id;
-    
+    Long id;
+
     @Column(name="targets")
-    private String targets;
-    
-    @Column(name="`offset`")
-    private Long offset;
-    
+    String targets;
+
+    @Column(name="delay")
+    Long delay;
+
     @Column(name="duration_to_clear")
-    private Long durationToClear;
-    
+    Long durationToClear;
+
     @Column(name="text_body")
-    private String textBody;
-        
+    String textBody;
+
     @Column(name="translate_grid_point_x")
-    private Float translateGridPointX;
-    
+    Float translateGridPointX;
+
     @Column(name="translate_grid_point_y")
-    private Float translateGridPointY;
-    
+    Float translateGridPointY;
+
     @Column(name="translate_duration")
-    private Long translateDuration;
-    
+    Long translateDuration;
+
     @Column(name="rotate_value")
-    private Float rotateValue;
-    
+    Float rotateValue;
+
     @Column(name="scale_mark")
-    private String scaleMark;
-    
+    String scaleMark;
+
     @Column(name="trim_x_pixel")
-    private Long trimXPixel;
-    
+    Long trimXPixel;
+
     @Column(name="trim_y_pixel")
-    private Long trimYPixel;
-    
+    Long trimYPixel;
+
     @Column(name="src")
-    private String src;
-    
-    @Column(name="chunk_id") // 塊ID: FK
-    private Long chunkId;
-    
+    String src;
+
     @Column(name="is_used")
-    private boolean isUsed;
-    
+    boolean isUsed;
+
 }

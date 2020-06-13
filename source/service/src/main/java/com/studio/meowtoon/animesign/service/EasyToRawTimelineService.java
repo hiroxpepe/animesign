@@ -27,97 +27,97 @@ import com.studio.meowtoon.animesign.repository.ResourceRepository;
 @Slf4j
 @Service
 public class EasyToRawTimelineService {
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // Field
-    
+
     @Inject
     private ApplicationContext context;
-    
+
     @Inject
     private EasyTimelineRepository easyTimelineRepository;
-    
+
     @Inject
     private TimelineRepository timelineRepository;
-    
+
     @Inject
     private ResourceRepository resourceRepository;
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // public Method
-    
+
     // easyTimeline のデータ処理して timeline に挿入する。
     @Transactional
     public void convertEasyToRaw() {
         try {
-            // easyTimeline のデータのクリアの情報の部分を計算してレコードに追加する            
+            // easyTimeline のデータのクリアの情報の部分を計算してレコードに追加する
             // 全体で Offset が順番通りに並んでないと動かない
-            
+
             // timeline データ全削除
             timelineRepository.deleteAll();
-            
+
             // easyTimeline データ取得
             List<EasyTimeline> easyTimelineList = easyTimelineRepository.findAll();
-            
+
             // timeline データ作成
-            createTimeline(easyTimelineList); 
-                        
+            createTimeline(easyTimelineList);
+
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);
         }
     }
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // private Method
-    
+
     private long getTotalDuration(List<EasyTimeline> easyTimelineList) {
         try {
             // 全体の尺取得
             long totalDuration = 0L;
             for (EasyTimeline easyTimeline : easyTimelineList) {
                 if (easyTimeline.getDurationToClear() != null) {
-                    long duration = easyTimeline.getOffset() + easyTimeline.getDurationToClear();
+                    long duration = easyTimeline.getDelay()+ easyTimeline.getDurationToClear();
                     if (duration > totalDuration) {
                         totalDuration = duration;
                     }
                 }
             }
             return totalDuration;
-            
+
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);
         }
     }
-    
+
     private long getComplementedDurationToClear(EasyTimeline easyTimeline, long totalDuration) {
-        try {            
+        try {
             // durationToClear が -1 の場合は全体の尺までの長さを計算して返す
             if (easyTimeline.getDurationToClear() == -1L) {
-                return totalDuration - easyTimeline.getOffset();
+                return totalDuration - easyTimeline.getDelay();
             } else {
                 return easyTimeline.getDurationToClear();
             }
-            
+
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);
         }
     }
-    
+
     private void createTimeline(List<EasyTimeline> easyTimelineList) {
         try {
             // 全体の尺取得
             long totalDuration = getTotalDuration(easyTimelineList);
-            
+
             for (EasyTimeline easyTimeline : easyTimelineList) {
                 log.debug(easyTimeline.toString());
                 ///////////////////////////////////////////////////////////////
                 // 表示処理
                 Timeline timeline1 = context.getBean(Timeline.class);
                 timeline1.setTargets(easyTimeline.getTargets());
-                timeline1.setOffset(easyTimeline.getOffset());
+                timeline1.setDelay(easyTimeline.getDelay());
                 timeline1.setOpacityValue(1L);
                 timeline1.setOpacityDuration(500L);
                 timeline1.setTextBody(easyTimeline.getTextBody());
@@ -192,15 +192,15 @@ public class EasyToRawTimelineService {
                 timeline1.setSrc(easyTimeline.getSrc());
                 timeline1.setUsed(easyTimeline.isUsed());
                 timelineRepository.save(timeline1);
-                
+
                 ///////////////////////////////////////////////////////////////
                 // 消去処理
                 if (easyTimeline.getDurationToClear() != null) {
                     Timeline timeline2 = context.getBean(Timeline.class);
                     Resource resource = resourceRepository.findByAttrId(easyTimeline.getTargets().replace("#", ""));
                     timeline2.setTargets(easyTimeline.getTargets());
-                    timeline2.setOffset(
-                        easyTimeline.getOffset() + 
+                    timeline2.setDelay(
+                        easyTimeline.getDelay() +
                         getComplementedDurationToClear(easyTimeline, totalDuration)
                     );
                     timeline2.setOpacityValue(0L);
@@ -212,8 +212,8 @@ public class EasyToRawTimelineService {
                     // 消してから初期位置に移動
                     Timeline timeline3 = context.getBean(Timeline.class);
                     timeline3.setTargets(easyTimeline.getTargets());
-                    timeline3.setOffset(
-                        easyTimeline.getOffset() + 
+                    timeline3.setDelay(
+                        easyTimeline.getDelay() +
                         getComplementedDurationToClear(easyTimeline, totalDuration) + 1000 // 1秒後
                     );
                     timeline3.setTranslateXValue((long) getDefaultPositionValue(resource).getX());
@@ -230,57 +230,57 @@ public class EasyToRawTimelineService {
             log.error(e.getMessage());
             throw new RuntimeException(e);
         }
-        
+
     }
-    
+
     // 元々配置してある位置を取得
     private Point getDefaultPositionValue(Resource resource) {
-        
+
         // 対象リソースの矩形縦横
         Rect rect = new Rect(
             resource.getAttrSrcWidth(),
             resource.getAttrSrcHeight()
         );
-        
+
         // CSS クラスの文字列
         String attrClass = resource.getAttrClass();
-        
+
         // 矩形の初期位置取得
-        PointHelper pointHelper = new PointHelper(attrClass, rect);        
+        PointHelper pointHelper = new PointHelper(attrClass, rect);
         return pointHelper.getDefaultPoint();
     }
-    
+
     // 元々配置してある位置からグリッドポイントに移動するには上下左右を計算で出す
     private Point convertGridPointToPixelValue(EasyTimeline easyTimeline, Resource resource) {
-        
+
         // 対象リソースの矩形縦横
         Rect rect = new Rect(
             resource.getAttrSrcWidth(),
             resource.getAttrSrcHeight()
         );
-        
+
         // CSS クラスの文字列
         String attrClass = resource.getAttrClass();
-        
+
         ///////////////////////////////////////////////////////////////////////
         // グリッドのある地点からある地点に移動する rect を計算する
-        
+
         // 矩形の初期位置の中心ポイント取得
         PointHelper pointHelper = new PointHelper(attrClass, rect);
         Point centerOfStartPoint = pointHelper.getCenterPoint();
         log.trace("centerOfStartPoint: " + centerOfStartPoint.toString());
-        
+
         // 矩形の移動後の中心ポイント取得
         Point centerOfEndPoint = new Point(
             Float.valueOf(easyTimeline.getTranslateGridPointX()) * 120,
             Float.valueOf(easyTimeline.getTranslateGridPointY()) * 120
         );
         log.trace("centerOfEndPoint: " + centerOfEndPoint.toString());
-        
+
         // 矩形を移動する為の値取得
         Point pointToMove = getVectorOfMove(centerOfStartPoint, centerOfEndPoint);
         log.trace("pointToMove: " + pointToMove.toString());
-        
+
         // 移動する値を返す
         float translateValueX = pointToMove.getX();
         float translateValueY = pointToMove.getY();
@@ -289,42 +289,42 @@ public class EasyToRawTimelineService {
             translateValueY
         );
     }
-    
+
     private Point getVectorOfMove(Point centerPointOfStart, Point centerPointOfEnd) {
         // X軸
         float moveX;
         float startX = centerPointOfStart.getX();
         float endX = centerPointOfEnd.getX();
         moveX = endX - startX;
-        
+
         // Y軸
         float moveY;
         float startY = centerPointOfStart.getY();
         float endY = centerPointOfEnd.getY();
         moveY = endY - startY;
-        
+
         // 移動する値を返す
         return new Point(
             moveX,
             moveY
         );
     }
-    
+
     @RequiredArgsConstructor
     public class PointHelper {
-        
+
         ///////////////////////////////////////////////////////////////////////
         // Field
-        
+
         @NonNull
         String attrClass;
-        
+
         @NonNull
         Rect rect;
-        
+
         ///////////////////////////////////////////////////////////////////////
         // public methods
-        
+
         // 矩形の中心位置取得
         public Point getCenterPoint() {
             // 初期位置に自分の矩形の 幅/2、高さ/2 を足す
@@ -334,17 +334,17 @@ public class EasyToRawTimelineService {
                 init.getY() + (rect.getHeight() / 2)
             );
         }
-        
+
         // 矩形の初期位置取得
         public Point getDefaultPoint() {
-            
+
             // CSSクラス取得
             String search = getCssClassofStartPosition();
-            
+
             // 矩形の縦横
             float width = rect.getWidth();
             float height = rect.getHeight();
-            
+
             // CSSクラスにより矩形の初期配置を取得する
             // ※CSSに書いてある値とは連動していない
             // TODO: CSSの自動生成
@@ -396,10 +396,10 @@ public class EasyToRawTimelineService {
             }
             return null;
         }
-        
+
         ///////////////////////////////////////////////////////////////////////
         // private methods
-        
+
         private String getCssClassofStartPosition() {
             // " " で分割して以下のような形式のCSSクラスを探す
             // left-top-720px-960px
@@ -407,8 +407,8 @@ public class EasyToRawTimelineService {
             List<String> attrClassList = Arrays.asList(attrClassArray);
             String search = null;
             for (String cssClass : attrClassList) {
-                if (cssClass.contains("left") || cssClass.contains("right") || 
-                    cssClass.contains("top") || cssClass.contains("bottom") || 
+                if (cssClass.contains("left") || cssClass.contains("right") ||
+                    cssClass.contains("top") || cssClass.contains("bottom") ||
                     cssClass.contains("center")
                 ) {
                     search = cssClass;
@@ -417,59 +417,59 @@ public class EasyToRawTimelineService {
             }
             if (search == null) {
                 log.warn("search is null...");
-                return null; 
+                return null;
             }
             return search;
         }
     }
-    
+
     @Value
     public class Point {
-        
+
         ///////////////////////////////////////////////////////////////////////
         // Field
-        
+
         @NonNull
         private float x;
-        
+
         @NonNull
         private float y;
-        
+
         ///////////////////////////////////////////////////////////////////////
         // public methods
-        
+
         public float getGridX() {
             return x / 120;
         }
-        
+
         public float getGridY() {
             return y / 120;
         }
-        
+
     }
-    
+
     @Value
     public class Rect {
-        
+
         ///////////////////////////////////////////////////////////////////////
         // Field
-        
+
         @NonNull
         private float width;
-        
+
         @NonNull
         private float height;
-        
+
         ///////////////////////////////////////////////////////////////////////
         // public methods
-        
+
         public float getGridWidth() {
             return width / 120;
         }
-        
+
         public float getGridHeight() {
             return height / 120;
         }
     }
-    
+
 }

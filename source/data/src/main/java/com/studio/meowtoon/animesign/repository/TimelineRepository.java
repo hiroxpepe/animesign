@@ -16,6 +16,6 @@ import com.studio.meowtoon.animesign.entity.Timeline;
 @Repository
 public interface TimelineRepository extends JpaRepository<Timeline, Long> {
     
-    List<Timeline> findByIsUsedOrderByOffsetAsc(boolean isUsed);
+    List<Timeline> findByIsUsedOrderByDelayAsc(boolean isUsed);
     
 }

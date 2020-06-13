@@ -17,39 +17,39 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name="resource")
+@Table(name="resources")
 public class Resource implements Serializable {
     
     ///////////////////////////////////////////////////////////////////////////
     // Field
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true)
-    private Long id;
+    Long id;
     
     @Column(name="elem")
-    private String elem;
+    String elem;
     
     @Column(name="attr_id")
-    private String attrId;
+    String attrId;
     
     @Column(name="attr_class")
-    private String attrClass;
+    String attrClass;
     
     @Column(name="attr_src")
-    private String attrSrc;
+    String attrSrc;
     
     @Column(name="attr_src_width")
-    private Long attrSrcWidth;
+    Long attrSrcWidth;
     
     @Column(name="attr_src_height")
-    private Long attrSrcHeight;
+    Long attrSrcHeight;
     
     @Column(name="options")
-    private String options;
+    String options;
     
     @Column(name="is_used")
-    private boolean isUsed;
+    boolean isUsed;
     
 }

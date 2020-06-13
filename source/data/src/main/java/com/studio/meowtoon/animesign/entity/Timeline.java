@@ -17,81 +17,81 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name="timeline")
+@Table(name="timelines")
 public class Timeline implements Serializable {
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // Field
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true)
-    private Long id;
-    
+    Long id;
+
     @Column(name="targets")
-    private String targets;
-    
-    @Column(name="`offset`")
-    private Long offset;
-    
+    String targets;
+
+    @Column(name="delay")
+    Long delay;
+
     @Column(name="opacity_value")
-    private Long opacityValue;
-    
+    Long opacityValue;
+
     @Column(name="opacity_duration")
-    private Long opacityDuration;
-    
+    Long opacityDuration;
+
     @Column(name="translate_x_value")
-    private Long translateXValue;
-    
+    Long translateXValue;
+
     @Column(name="translate_x_duration")
-    private Long translateXDuration;
-    
+    Long translateXDuration;
+
     @Column(name="translate_y_value")
-    private Long translateYValue;
-    
+    Long translateYValue;
+
     @Column(name="translate_y_duration")
-    private Long translateYDuration;
-    
+    Long translateYDuration;
+
     @Column(name="src")
-    private String src;
-    
+    String src;
+
     @Column(name="duration")
-    private Long duration;
-    
+    Long duration;
+
     @Column(name="easing")
-    private String easing;
-    
+    String easing;
+
     @Column(name="rotate_value")
-    private Float rotateValue;
-    
+    Float rotateValue;
+
     @Column(name="rotate_duration")
-    private Long rotateDuration;
-    
+    Long rotateDuration;
+
     @Column(name="rotate_easing")
-    private String rotateEasing;
-    
+    String rotateEasing;
+
     @Column(name="scale_value")
-    private Float scaleValue;
-    
+    Float scaleValue;
+
     @Column(name="scale_duration")
-    private Long scaleDuration;
-    
+    Long scaleDuration;
+
     @Column(name="scale_easing")
-    private String scaleEasing;
-    
+    String scaleEasing;
+
     @Column(name="text_body")
-    private String textBody;
-    
+    String textBody;
+
     @Column(name="text_x")
-    private Long textX;
-    
+    Long textX;
+
     @Column(name="text_y")
-    private Long textY;
-    
+    Long textY;
+
     @Column(name="kind")
-    private String kind;
-    
+    String kind;
+
     @Column(name="is_used")
-    private boolean isUsed;
-    
+    boolean isUsed;
+
 }

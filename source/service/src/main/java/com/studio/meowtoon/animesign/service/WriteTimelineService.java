@@ -22,47 +22,47 @@ import com.studio.meowtoon.animesign.repository.TimelineRepository;
 @Slf4j
 @Service
 public class WriteTimelineService {
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // Field
-    
+
     @Inject
     private ApplicationContext context;
-    
+
     @Inject
     private TimelineRepository repository;
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // public Method
-    
+
     // timeline 再生用の javascript ファイルを動的に
     // 生成してファイル出力する。
     @Transactional
     public void createJavaScript() {
         try {
-            List<Timeline> timelienList = repository.findByIsUsedOrderByOffsetAsc(true);
+            List<Timeline> timelienList = repository.findByIsUsedOrderByDelayAsc(true);
             if (timelienList == null) {
                 log.warn("timelien list is empty.");
                 return;
             }
-            
+
             // JavaScript の関数を動的に作成する
             String javaScript = addTimeline(timelienList);
             javaScript += initTimeline(timelienList);
-            
+
             // ファイル出力
             writeJavaScript(javaScript);
-            
+
         } catch (IOException ex) {
             log.error(ex.getMessage());
             throw new RuntimeException(ex);
         }
-        
+
     }
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // private Method
-    
+
     private String initTimeline(List<Timeline> timelienList) {
         String javaScript = "function initTimeline() {\n";
         // timeline リストをループ処理する
@@ -74,22 +74,22 @@ public class WriteTimelineService {
         javaScript += "}\n";
         return javaScript;
     }
-    
+
     // JavaScript の関数を動的に作成する
     private String addTimeline(List<Timeline> timelienList) {
         String javaScript = "function buildTimeline(basicTimeline) {\n";
         javaScript += "\t" + "basicTimeline.add({\n";
-        
+
         ///////////////////////////////////////////////////////////////////
         // タイムラインデータの登録: timeline リストをループ処理する
         for (Timeline timeline : timelienList) {
             ///////////////////////////////////////////////////////////////////
-            // 背景画像変更パターン              
+            // 背景画像変更パターン
             if (timeline.getTargets().contains("background")) {
                 javaScript +=
                     "\t" + "}).add({\n" +
                     "\t\t" + "targets: '" + timeline.getTargets() + "',\n" +
-                    "\t\t" + "offset: " + timeline.getOffset() + ",\n" +
+                    "\t\t" + "offset: " + timeline.getDelay() + ",\n" +
                     "\t\t" + "src: '" + timeline.getSrc() + "',\n" +
                     "\t\t" + "duration: " + timeline.getDuration() + ",\n" +
                     "\t\t" + "easing: '" + timeline.getEasing() + "'\n";
@@ -101,7 +101,7 @@ public class WriteTimelineService {
                 javaScript +=
                     "\t" + "}).add({\n" +
                     "\t\t" + "targets: '" + timeline.getTargets() + "',\n" +
-                    "\t\t" + "offset: " + timeline.getOffset() + ",\n" +
+                    "\t\t" + "offset: " + timeline.getDelay() + ",\n" +
                     "\t\t" + "opacity: {value: " + timeline.getOpacityValue() + ", duration: " + timeline.getOpacityDuration() + "},\n" +
                     "\t\t" + "translateX: {value: " + timeline.getTranslateXValue() + ", duration: " + timeline.getTranslateXDuration() + "},\n" +
                     "\t\t" + "translateY: {value: " + timeline.getTranslateYValue() + ", duration: " + timeline.getTranslateYDuration() + "},\n" +
@@ -116,7 +116,7 @@ public class WriteTimelineService {
                 javaScript +=
                     "\t" + "}).add({\n" +
                     "\t\t" + "targets: '" + timeline.getTargets() + "',\n" +
-                    "\t\t" + "offset: " + timeline.getOffset() + ",\n" +
+                    "\t\t" + "offset: " + timeline.getDelay() + ",\n" +
                     "\t\t" + "opacity: {value: " + timeline.getOpacityValue() + ", duration: " + timeline.getOpacityDuration() + "},\n" +
                     "\t\t" + "easing: '" + timeline.getEasing() + "'\n";
                 continue;
@@ -127,7 +127,7 @@ public class WriteTimelineService {
                 javaScript +=
                     "\t" + "}).add({\n" +
                     "\t\t" + "targets: '" + timeline.getTargets() + "',\n" +
-                    "\t\t" + "offset: " + timeline.getOffset() + ",\n" +
+                    "\t\t" + "offset: " + timeline.getDelay() + ",\n" +
                     "\t\t" + "translateX: {value: " + timeline.getTranslateXValue() + ", duration: " + timeline.getTranslateXDuration() + "},\n" +
                     "\t\t" + "translateY: {value: " + timeline.getTranslateYValue() + ", duration: " + timeline.getTranslateYDuration() + "},\n" +
                     "\t\t" + "easing: '" + timeline.getEasing() + "'\n";
@@ -139,7 +139,7 @@ public class WriteTimelineService {
                 javaScript +=
                     "\t" + "}).add({\n" +
                     "\t\t" + "targets: '" + timeline.getTargets() + ", " + timeline.getTargets().replace("img", "text") + "',\n" +
-                    "\t\t" + "offset: " + timeline.getOffset() + ",\n" +
+                    "\t\t" + "offset: " + timeline.getDelay() + ",\n" +
                     "\t\t" + "opacity: {value: " + timeline.getOpacityValue() + ", duration: " + timeline.getOpacityDuration() + "},\n" +
                     "\t\t" + "translateX: {value: " + timeline.getTranslateXValue() + ", duration: " + timeline.getTranslateXDuration() + "},\n" +
                     "\t\t" + "translateY: {value: " + timeline.getTranslateYValue() + ", duration: " + timeline.getTranslateYDuration() + "},\n" +
@@ -158,7 +158,7 @@ public class WriteTimelineService {
                 javaScript +=
                     "\t" + "}).add({\n" +
                     "\t\t" + "targets: '" + timeline.getTargets() + ", " + timeline.getTargets().replace("img", "text") + "',\n" +
-                    "\t\t" + "offset: " + timeline.getOffset() + ",\n" +
+                    "\t\t" + "offset: " + timeline.getDelay() + ",\n" +
                     "\t\t" + "opacity: {value: " + timeline.getOpacityValue() + ", duration: " + timeline.getOpacityDuration() + "},\n" +
                     "\t\t" + "easing: '" + timeline.getEasing() + "',\n" +
                     "\t\t" + "complete: function(anim) {\n" +
@@ -172,7 +172,7 @@ public class WriteTimelineService {
                 javaScript +=
                     "\t" + "}).add({\n" +
                     "\t\t" + "targets: '" + timeline.getTargets() + ", " + timeline.getTargets().replace("img", "text") + "',\n" +
-                    "\t\t" + "offset: " + timeline.getOffset() + ",\n" +
+                    "\t\t" + "offset: " + timeline.getDelay() + ",\n" +
                     "\t\t" + "translateX: {value: " + timeline.getTranslateXValue() + ", duration: " + timeline.getTranslateXDuration() + "},\n" +
                     "\t\t" + "translateY: {value: " + timeline.getTranslateYValue() + ", duration: " + timeline.getTranslateYDuration() + "},\n" +
                     "\t\t" + "easing: '" + timeline.getEasing() + "'\n";
@@ -183,7 +183,7 @@ public class WriteTimelineService {
         javaScript += "}\n";
         return javaScript;
     }
-    
+
     // 回転の設定
     private String getRotate(Timeline timeline) {
         if (timeline.getRotateValue() != null) {
@@ -191,7 +191,7 @@ public class WriteTimelineService {
         }
         return "";
     }
-    
+
     // 拡大縮小の設定
     private String getScale(Timeline timeline) {
         if (timeline.getScaleValue() != null) {
@@ -199,7 +199,7 @@ public class WriteTimelineService {
         }
         return "";
     }
-    
+
     // /var/www/html/animesign-resources/ にファイル書き出し
     private void writeJavaScript(String animeTimeline) throws IOException {
         FileUtils.writeStringToFile(
@@ -208,5 +208,5 @@ public class WriteTimelineService {
             "UTF-8"
         );
     }
-    
+
 }

@@ -19,7 +19,7 @@ public class EasyTimelineModel implements Serializable {
     
     private String targets;
     
-    private Long offset;
+    private Long delay;
     
     private Long durationToClear;
     

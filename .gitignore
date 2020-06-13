@@ -15,3 +15,6 @@ DOCUMENT_J.md
 *.mdb
 *.save
 *.orig
+*.bat
+*.log
+*.txt
