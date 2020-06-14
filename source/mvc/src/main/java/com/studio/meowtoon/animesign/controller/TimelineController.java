@@ -1,9 +1,25 @@
+/*
+ * Copyright 2002-2020 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.studio.meowtoon.animesign.controller;
 
 import java.util.LinkedList;
 import java.util.List;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest; 
+import javax.servlet.http.HttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
@@ -23,7 +39,6 @@ import com.studio.meowtoon.animesign.service.WriteTimelineService;
 import com.studio.meowtoon.animesign.service.EasyToRawTimelineService;
 import com.studio.meowtoon.animesign.response.Response;
 
-///////////////////////////////////////////////////////////////////////////////
 /**
  * @author h.adachi
  */
@@ -31,36 +46,36 @@ import com.studio.meowtoon.animesign.response.Response;
 @Controller
 @Scope(value="session")
 public class TimelineController {
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // Field
-    
+
     private static final String RESPONSE_BEAN_ID = "response";
-    
+
     @Inject
     private HttpServletRequest request = null;
-    
+
     @Inject
     private ApplicationContext context = null;
-    
+
     @Inject
     private Mapper mapper = null;
-    
+
     @Inject
     private ResourceService resourceService = null;
-    
+
     @Inject
     private WriteTimelineService writeTimelineService = null;
-    
+
     @Inject
     private EasyToRawTimelineService easyToRawTimelineService = null;
-    
+
     @Inject
     private ResourceImageService resourceImageService = null;
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // public methods
-    
+
     // 初回リクエスト /index.html ページを返す
     // ※現状では画像ファイルを HTML に埋め込む
     @RequestMapping(
@@ -71,21 +86,21 @@ public class TimelineController {
         Model model
     ) {
         log.info("GET request to '/index' from " + request.getRemoteHost());
-        
+
         // resource のリスト取得
         List<ResourceForm> resourceFormList = new LinkedList<ResourceForm>();
         for (Resource resource : resourceService.getResourceList()) {
             resourceFormList.add(mapper.map(resource, ResourceForm.class));
         }
-        
+
         // デフォルト背景URL取得
         String defaultBackground = resourceService.getDefaultBackground();
-        
+
         // model に対してHTMLで表示するデータをセット
         model.addAttribute("resourceList", resourceFormList);
         model.addAttribute("defaultBackground", defaultBackground);
     }
-    
+
     // Ajax リクエストを受け、タイムライン再生用の JavaScript ファイルを動的生成する
     @RequestMapping(
         value="/build",
@@ -94,10 +109,10 @@ public class TimelineController {
     )
     public @ResponseBody Response getBuild() {
         log.info("Ajax GET request to '/build' from " + request.getRemoteHost());
-        
+
         // timeline データ作成
         //buildTimeline(); // 一時的に停止
-        
+
         // レスポンス用のオブジェクトを返す
         return (Response) context.getBean(
             RESPONSE_BEAN_ID,
@@ -105,19 +120,19 @@ public class TimelineController {
             "write timeline list complete."
         );
     }
-    
+
     ///////////////////////////////////////////////////////////////////////////
     // private methods
-    
+
     private void buildTimeline() {
         // resource 画像の情報取得
         resourceImageService.getResourceInfo();
-        
+
         // timeline のデータを再構築
         easyToRawTimelineService.convertEasyToRaw();
-        
+
         // timeline 再生用の JavaSctipt ファイルを出力
         writeTimelineService.createJavaScript();
     }
-    
+
 }
