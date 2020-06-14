@@ -39,8 +39,7 @@ public class Timeline implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(unique=true)
-    Long id;
+    Long id; // un need @Column(unique=true)
 
     @Column(name="targets")
     String targets;
