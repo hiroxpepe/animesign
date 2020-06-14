@@ -204,7 +204,7 @@ public class EasyToRawTimelineService {
                 ///////////////////////////////////////////////////////////////
                 // 画像リソースを変更することが出来る TODO: オブジェクトでは？
                 timeline1.setSrc(easyTimeline.getSrc());
-                timeline1.setUsed(easyTimeline.isUsed());
+                timeline1.setUse(easyTimeline.isUse());
                 timelineRepository.save(timeline1);
 
                 ///////////////////////////////////////////////////////////////
@@ -221,7 +221,7 @@ public class EasyToRawTimelineService {
                     timeline2.setOpacityDuration(500L);
                     timeline2.setEasing("linear");
                     timeline2.setKind("hide-object");
-                    timeline2.setUsed(easyTimeline.isUsed());
+                    timeline2.setUse(easyTimeline.isUse());
                     timelineRepository.save(timeline2);
                     // 消してから初期位置に移動
                     Timeline timeline3 = context.getBean(Timeline.class);
@@ -236,7 +236,7 @@ public class EasyToRawTimelineService {
                     timeline3.setTranslateYDuration(0L);
                     timeline3.setEasing("linear");
                     timeline3.setKind("init-object");
-                    timeline3.setUsed(easyTimeline.isUsed());
+                    timeline3.setUse(easyTimeline.isUse());
                     timelineRepository.save(timeline3);
                 }
             }

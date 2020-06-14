@@ -78,7 +78,7 @@ public class EasyTimeline implements Serializable {
     @Column(name="src")
     String src;
 
-    @Column(name="is_used")
-    boolean isUsed;
+    @Column(name="use")
+    boolean use;
 
 }

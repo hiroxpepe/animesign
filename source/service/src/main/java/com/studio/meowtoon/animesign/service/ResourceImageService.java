@@ -56,7 +56,7 @@ public class ResourceImageService {
     @Transactional
     public void getResourceInfo() {
         try {
-            List<Resource> resourceList = repository.findByIsUsedOrderByIdAsc(true);
+            List<Resource> resourceList = repository.findByUseOrderByIdAsc(true);
             for (Resource resource : resourceList) {
                 String url = resource.getAttrSrc();
                 if (url == null) {

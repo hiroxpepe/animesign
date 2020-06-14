@@ -105,7 +105,7 @@ public class Timeline implements Serializable {
     @Column(name="kind")
     String kind;
 
-    @Column(name="is_used")
-    boolean isUsed;
+    @Column(name="use")
+    boolean use;
 
 }

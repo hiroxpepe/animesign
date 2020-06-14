@@ -54,7 +54,7 @@ public class WriteTimelineService {
     @Transactional
     public void createJavaScript() {
         try {
-            List<Timeline> timelienList = repository.findByIsUsedOrderByDelayAsc(true);
+            List<Timeline> timelienList = repository.findByUseOrderByDelayAsc(true);
             if (timelienList == null) {
                 log.warn("timelien list is empty.");
                 return;
