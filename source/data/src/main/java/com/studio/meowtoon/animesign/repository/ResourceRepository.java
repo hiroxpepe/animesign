@@ -30,9 +30,9 @@ import com.studio.meowtoon.animesign.entity.Resource;
 @Repository
 public interface ResourceRepository extends JpaRepository<Resource, Long> {
 
-    List<Resource> findByAttrIdNotAndIsUsedOrderByIdAsc(String attrId, boolean isUsed);
+    List<Resource> findByAttrIdNotAndUseOrderByIdAsc(String attrId, boolean use);
 
-    List<Resource> findByIsUsedOrderByIdAsc(boolean isUsed);
+    List<Resource> findByUseOrderByIdAsc(boolean use);
 
     Resource findByOptionsLike(String options);
 

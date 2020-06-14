@@ -63,7 +63,7 @@ public class Resource implements Serializable {
     @Column(name="options")
     String options;
 
-    @Column(name="is_used")
-    boolean isUsed;
+    @Column(name="use")
+    boolean use;
 
 }

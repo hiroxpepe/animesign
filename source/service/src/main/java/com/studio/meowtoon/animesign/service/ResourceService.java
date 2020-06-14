@@ -51,7 +51,7 @@ public class ResourceService {
     public List<Resource> getResourceList() {
         try {
             // "default-background" は除外
-            List<Resource> list = repository.findByAttrIdNotAndIsUsedOrderByIdAsc("default-background", true);
+            List<Resource> list = repository.findByAttrIdNotAndUseOrderByIdAsc("default-background", true);
             if (list != null) {
                 return list;
             } else {
