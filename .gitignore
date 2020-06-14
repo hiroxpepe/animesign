@@ -9,6 +9,7 @@ tmp
 app-db
 logs
 node_modules
+memo
 nbactions.xml
 DOCUMENT_J.md
 *.code-workspace
@@ -18,3 +19,5 @@ DOCUMENT_J.md
 *.bat
 *.log
 *.txt
+
+!LICENSE.txt

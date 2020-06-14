@@ -1,9 +1,9 @@
 # AnimeSign
-## CSS Motion Comic Generator. 
+## Motion Comic Generator for a Web browser.
 ![game image](https://i.imgur.com/MLwz2nx.png)
 
 ## Overview
-It's a Web application that displays like motion comic animation on a Web browser.
+It's a Web application that displays like a motion comic animation on the Web browser.
 
 ## Content
 - docker : WEB Server by Nginx.
@@ -24,7 +24,6 @@ $ mvn install
 
 ## How to run.
 ### Terminal 1 : run web server via docker.
-- run
 ```sh
 $ cd PathToThisREADME.md
 $ cd docker
@@ -35,7 +34,6 @@ Creating animesign_nginx ... done
 http://localhost/index.html  
 
 ### Terminal 2 : run app server via jetty:run.
-- run
 ```sh
 $ cd PathToThisREADME.md
 $ cd source/webapp
@@ -51,5 +49,5 @@ http://localhost:8080/animesign/
 ## How to deploy to the other environment as a docker image.
 - TBA
 
-## license
-- TBA
+## License
+It's released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
