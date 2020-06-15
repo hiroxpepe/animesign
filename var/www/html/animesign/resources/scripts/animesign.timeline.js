@@ -25,13 +25,6 @@ function buildTimeline(basicTimeline) {
 		duration: 0,
 		easing: 'linear'
 	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 3800,
-		opacity: {value: 1, duration: 500},
-		translateX: {value: -900, duration: 2000},
-		translateY: {value: -480, duration: 2000},
-		easing: 'easeInOutQuint'
-	}).add({
 		targets: '#back-scroll1-to-right',
 		offset: 4000,
 		opacity: {value: 1, duration: 500},
@@ -81,13 +74,6 @@ function buildTimeline(basicTimeline) {
 			hideBalloonText('#balloon-mid-text-L');
 		}
 	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 10000,
-		opacity: {value: 1, duration: 500},
-		translateX: {value: -1020, duration: 2000},
-		translateY: {value: -600, duration: 2000},
-		easing: 'easeInOutQuint'
-	}).add({
 		targets: '#obj1-left-center',
 		offset: 10000,
 		opacity: {value: 0, duration: 500},
@@ -125,13 +111,6 @@ function buildTimeline(basicTimeline) {
 			'#balloon-mid-text-R',
 			null,null);
 		}
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 15000,
-		opacity: {value: 1, duration: 500},
-		translateX: {value: -900, duration: 2000},
-		translateY: {value: -480, duration: 2000},
-		easing: 'easeInOutQuint'
 	}).add({
 		targets: '#obj1-right-center',
 		offset: 16000,
@@ -187,13 +166,6 @@ function buildTimeline(basicTimeline) {
 			hideBalloonText('#balloon-mid-text-L');
 		}
 	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 21000,
-		opacity: {value: 1, duration: 500},
-		translateX: {value: -1020, duration: 2000},
-		translateY: {value: -600, duration: 2000},
-		easing: 'easeInOutQuint'
-	}).add({
 		targets: '#obj1-left-center',
 		offset: 21000,
 		opacity: {value: 0, duration: 500},
@@ -237,22 +209,7 @@ function buildTimeline(basicTimeline) {
 		opacity: {value: 0, duration: 500},
 		easing: 'linear'
 	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 27000,
-		opacity: {value: 0, duration: 500},
-		easing: 'linear'
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 27000,
-		opacity: {value: 0, duration: 500},
-		easing: 'linear'
-	}).add({
 		targets: '#back-scroll2-to-right',
-		offset: 27000,
-		opacity: {value: 0, duration: 500},
-		easing: 'linear'
-	}).add({
-		targets: '#frame-900p-to-left',
 		offset: 27000,
 		opacity: {value: 0, duration: 500},
 		easing: 'linear'
@@ -268,17 +225,6 @@ function buildTimeline(basicTimeline) {
 		targets: '#obj1-right-center',
 		offset: 27000,
 		opacity: {value: 0, duration: 500},
-		easing: 'linear'
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 27000,
-		opacity: {value: 0, duration: 500},
-		easing: 'linear'
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 28000,
-		translateX: {value: -960, duration: 0},
-		translateY: {value: -540, duration: 0},
 		easing: 'linear'
 	}).add({
 		targets: '#balloon-mid-img-R, #balloon-mid-text-R',
@@ -299,28 +245,10 @@ function buildTimeline(basicTimeline) {
 		translateY: {value: 0, duration: 0},
 		easing: 'linear'
 	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 28000,
-		translateX: {value: -960, duration: 0},
-		translateY: {value: -540, duration: 0},
-		easing: 'linear'
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 28000,
-		translateX: {value: -960, duration: 0},
-		translateY: {value: -540, duration: 0},
-		easing: 'linear'
-	}).add({
 		targets: '#obj1-right-center',
 		offset: 28000,
 		translateX: {value: 1560, duration: 0},
 		translateY: {value: 60, duration: 0},
-		easing: 'linear'
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 28000,
-		translateX: {value: -960, duration: 0},
-		translateY: {value: -540, duration: 0},
 		easing: 'linear'
 	});
 }

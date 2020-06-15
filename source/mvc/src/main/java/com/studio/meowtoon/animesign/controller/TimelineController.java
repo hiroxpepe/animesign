@@ -111,7 +111,7 @@ public class TimelineController {
         log.info("Ajax GET request to '/build' from " + request.getRemoteHost());
 
         // timeline データ作成
-        buildTimeline(); // 一時的に停止
+        buildTimeline();
 
         // レスポンス用のオブジェクトを返す
         return (Response) context.getBean(
