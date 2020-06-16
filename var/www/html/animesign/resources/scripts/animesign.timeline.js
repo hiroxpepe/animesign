@@ -25,31 +25,24 @@ function buildTimeline(basicTimeline) {
 		duration: 0,
 		easing: 'linear'
 	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 3800,
-		opacity: {value: 1, duration: 500},
-		translateX: {value: -900, duration: 2000},
-		translateY: {value: -480, duration: 2000},
-		easing: 'easeInOutQuint'
-	}).add({
-		targets: '#back-scroll1-to-right',
-		offset: 4000,
-		opacity: {value: 1, duration: 500},
-		translateX: {value: -720, duration: 23000},
-		translateY: {value: 0, duration: 23000},
-		easing: 'linear'
-	}).add({
 		targets: '#default-background',
 		offset: 4000,
 		src: 'http://localhost/animesign/resources/images/backgrounds/background_0_1920px_1080px.png',
 		duration: 0,
 		easing: 'linear'
 	}).add({
+		targets: '#back-scroll1-to-right',
+		offset: 4000,
+		opacity: {value: 1, duration: 500},
+		translateX: {value: -720, duration: 12000},
+		translateY: {value: 0, duration: 12000},
+		easing: 'linear'
+	}).add({
 		targets: '#back-scroll2-to-right',
 		offset: 4000,
 		opacity: {value: 1, duration: 500},
-		translateX: {value: -1320, duration: 23000},
-		translateY: {value: 0, duration: 23000},
+		translateX: {value: -1320, duration: 12000},
+		translateY: {value: 0, duration: 12000},
 		easing: 'linear'
 	}).add({
 		targets: '#obj1-left-center',
@@ -67,11 +60,16 @@ function buildTimeline(basicTimeline) {
 		translateY: {value: 360, duration: 1000},
 		easing: 'easeInOutQuint',
 		complete: function(anim) {
-			showBalloonText('こんにちは！',
+			showBalloonText('\u3053\u3093\u306b\u3061\u306f\uff01',
 			'#balloon-mid-img-L',
 			'#balloon-mid-text-L',
 			null,null);
 		}
+	}).add({
+		targets: '#obj1-left-center',
+		offset: 10000,
+		opacity: {value: 0, duration: 500},
+		easing: 'linear'
 	}).add({
 		targets: '#balloon-mid-img-L, #balloon-mid-text-L',
 		offset: 10000,
@@ -81,22 +79,16 @@ function buildTimeline(basicTimeline) {
 			hideBalloonText('#balloon-mid-text-L');
 		}
 	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 10000,
-		opacity: {value: 1, duration: 500},
-		translateX: {value: -1020, duration: 2000},
-		translateY: {value: -600, duration: 2000},
-		easing: 'easeInOutQuint'
-	}).add({
 		targets: '#obj1-left-center',
-		offset: 10000,
-		opacity: {value: 0, duration: 500},
+		offset: 11000,
+		translateX: {value: 0, duration: 0},
+		translateY: {value: 540, duration: 0},
 		easing: 'linear'
 	}).add({
 		targets: '#balloon-mid-img-L, #balloon-mid-text-L',
 		offset: 11000,
-		translateX: {value: 1380, duration: 0},
-		translateY: {value: -360, duration: 0},
+		translateX: {value: 1920, duration: 0},
+		translateY: {value: 0, duration: 0},
 		easing: 'linear'
 	}).add({
 		targets: '#obj1-right-center',
@@ -104,14 +96,7 @@ function buildTimeline(basicTimeline) {
 		opacity: {value: 1, duration: 500},
 		translateX: {value: -1440, duration: 1000},
 		translateY: {value: 0, duration: 1000},
-		rotate: {value: -0.0, duration: 1000, easing: 'easeInOutQuint'},
 		easing: 'easeInOutQuint'
-	}).add({
-		targets: '#obj1-left-center',
-		offset: 11000,
-		translateX: {value: -360, duration: 0},
-		translateY: {value: 60, duration: 0},
-		easing: 'linear'
 	}).add({
 		targets: '#balloon-mid-img-R, #balloon-mid-text-R',
 		offset: 12000,
@@ -120,23 +105,11 @@ function buildTimeline(basicTimeline) {
 		translateY: {value: 360, duration: 1000},
 		easing: 'easeInOutQuint',
 		complete: function(anim) {
-			showBalloonText('はいはい。\nなになに？\vとかナ',
+			showBalloonText('\u3069\u3046\u3082\u3002',
 			'#balloon-mid-img-R',
 			'#balloon-mid-text-R',
 			null,null);
 		}
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 15000,
-		opacity: {value: 1, duration: 500},
-		translateX: {value: -900, duration: 2000},
-		translateY: {value: -480, duration: 2000},
-		easing: 'easeInOutQuint'
-	}).add({
-		targets: '#obj1-right-center',
-		offset: 16000,
-		opacity: {value: 0, duration: 500},
-		easing: 'linear'
 	}).add({
 		targets: '#balloon-mid-img-R, #balloon-mid-text-R',
 		offset: 16000,
@@ -146,191 +119,47 @@ function buildTimeline(basicTimeline) {
 			hideBalloonText('#balloon-mid-text-R');
 		}
 	}).add({
-		targets: '#obj1-left-center',
+		targets: '#obj1-right-center',
 		offset: 16000,
-		opacity: {value: 1, duration: 500},
-		translateX: {value: 1440, duration: 1000},
-		translateY: {value: 0, duration: 1000},
-		rotate: {value: 0.0, duration: 1000, easing: 'easeInOutQuint'},
-		easing: 'easeInOutQuint'
-	}).add({
-		targets: '#balloon-mid-img-R, #balloon-mid-text-R',
-		offset: 17000,
-		translateX: {value: -540, duration: 0},
-		translateY: {value: -360, duration: 0},
-		easing: 'linear'
-	}).add({
-		targets: '#balloon-mid-img-L, #balloon-mid-text-L',
-		offset: 17000,
-		opacity: {value: 1, duration: 500},
-		translateX: {value: -1320, duration: 1000},
-		translateY: {value: 360, duration: 1000},
-		easing: 'easeInOutQuint',
-		complete: function(anim) {
-			showBalloonText('どうしたの？',
-			'#balloon-mid-img-L',
-			'#balloon-mid-text-L',
-			null,null);
-		}
-	}).add({
-		targets: '#obj1-right-center',
-		offset: 17000,
-		translateX: {value: 1560, duration: 0},
-		translateY: {value: 60, duration: 0},
-		easing: 'linear'
-	}).add({
-		targets: '#balloon-mid-img-L, #balloon-mid-text-L',
-		offset: 21000,
-		opacity: {value: 0, duration: 500},
-		easing: 'linear',
-		complete: function(anim) {
-			hideBalloonText('#balloon-mid-text-L');
-		}
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 21000,
-		opacity: {value: 1, duration: 500},
-		translateX: {value: -1020, duration: 2000},
-		translateY: {value: -600, duration: 2000},
-		easing: 'easeInOutQuint'
-	}).add({
-		targets: '#obj1-left-center',
-		offset: 21000,
 		opacity: {value: 0, duration: 500},
 		easing: 'linear'
-	}).add({
-		targets: '#obj1-right-center',
-		offset: 22000,
-		opacity: {value: 1, duration: 500},
-		translateX: {value: -1440, duration: 1000},
-		translateY: {value: 0, duration: 1000},
-		rotate: {value: -0.0, duration: 1000, easing: 'easeInOutQuint'},
-		easing: 'easeInOutQuint'
-	}).add({
-		targets: '#balloon-mid-img-L, #balloon-mid-text-L',
-		offset: 22000,
-		translateX: {value: 1380, duration: 0},
-		translateY: {value: -360, duration: 0},
-		easing: 'linear'
-	}).add({
-		targets: '#obj1-left-center',
-		offset: 22000,
-		translateX: {value: -360, duration: 0},
-		translateY: {value: 60, duration: 0},
-		easing: 'linear'
-	}).add({
-		targets: '#balloon-mid-img-R, #balloon-mid-text-R',
-		offset: 23000,
-		opacity: {value: 1, duration: 500},
-		translateX: {value: 1320, duration: 1000},
-		translateY: {value: 360, duration: 1000},
-		easing: 'easeInOutQuint',
-		complete: function(anim) {
-			showBalloonText('別に～\nとかナ',
-			'#balloon-mid-img-R',
-			'#balloon-mid-text-R',
-			null,null);
-		}
 	}).add({
 		targets: '#back-scroll1-to-right',
-		offset: 27000,
-		opacity: {value: 0, duration: 500},
-		easing: 'linear'
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 27000,
-		opacity: {value: 0, duration: 500},
-		easing: 'linear'
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 27000,
+		offset: 17000,
 		opacity: {value: 0, duration: 500},
 		easing: 'linear'
 	}).add({
 		targets: '#back-scroll2-to-right',
-		offset: 27000,
+		offset: 17000,
 		opacity: {value: 0, duration: 500},
 		easing: 'linear'
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 27000,
-		opacity: {value: 0, duration: 500},
-		easing: 'linear'
-	}).add({
-		targets: '#balloon-mid-img-R, #balloon-mid-text-R',
-		offset: 27000,
-		opacity: {value: 0, duration: 500},
-		easing: 'linear',
-		complete: function(anim) {
-			hideBalloonText('#balloon-mid-text-R');
-		}
 	}).add({
 		targets: '#obj1-right-center',
-		offset: 27000,
-		opacity: {value: 0, duration: 500},
-		easing: 'linear'
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 27000,
-		opacity: {value: 0, duration: 500},
-		easing: 'linear'
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 28000,
-		translateX: {value: -960, duration: 0},
-		translateY: {value: -540, duration: 0},
+		offset: 17000,
+		translateX: {value: 1920, duration: 0},
+		translateY: {value: 540, duration: 0},
 		easing: 'linear'
 	}).add({
 		targets: '#balloon-mid-img-R, #balloon-mid-text-R',
-		offset: 28000,
-		translateX: {value: -540, duration: 0},
-		translateY: {value: -360, duration: 0},
-		easing: 'linear'
-	}).add({
-		targets: '#back-scroll2-to-right',
-		offset: 28000,
+		offset: 17000,
 		translateX: {value: 0, duration: 0},
 		translateY: {value: 0, duration: 0},
 		easing: 'linear'
 	}).add({
+		targets: '#back-scroll2-to-right',
+		offset: 18000,
+		translateX: {value: 1920, duration: 0},
+		translateY: {value: 540, duration: 0},
+		easing: 'linear'
+	}).add({
 		targets: '#back-scroll1-to-right',
-		offset: 28000,
-		translateX: {value: 480, duration: 0},
-		translateY: {value: 0, duration: 0},
-		easing: 'linear'
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 28000,
-		translateX: {value: -960, duration: 0},
-		translateY: {value: -540, duration: 0},
-		easing: 'linear'
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 28000,
-		translateX: {value: -960, duration: 0},
-		translateY: {value: -540, duration: 0},
-		easing: 'linear'
-	}).add({
-		targets: '#obj1-right-center',
-		offset: 28000,
-		translateX: {value: 1560, duration: 0},
-		translateY: {value: 60, duration: 0},
-		easing: 'linear'
-	}).add({
-		targets: '#frame-900p-to-left',
-		offset: 28000,
-		translateX: {value: -960, duration: 0},
-		translateY: {value: -540, duration: 0},
+		offset: 18000,
+		translateX: {value: 1920, duration: 0},
+		translateY: {value: 540, duration: 0},
 		easing: 'linear'
 	});
 }
 function initTimeline() {
-	$('#balloon-mid-text-L').html('')
-	$('#balloon-mid-text-L').html('')
-	$('#balloon-mid-text-L').html('')
-	$('#balloon-mid-text-R').html('')
-	$('#balloon-mid-text-R').html('')
-	$('#balloon-mid-text-R').html('')
 	$('#balloon-mid-text-L').html('')
 	$('#balloon-mid-text-L').html('')
 	$('#balloon-mid-text-L').html('')
