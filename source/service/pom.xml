@@ -9,12 +9,12 @@
     <packaging>jar</packaging>
     <version>1.0.0</version>
     <name>animesign-service</name>
-    
+
     <properties>
         <animesign.version>1.0.0</animesign.version>
         <spring.version>3.1.2.RELEASE</spring.version>
         <slf4j.version>1.6.6</slf4j.version>
-        <java.version>1.6</java.version>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
