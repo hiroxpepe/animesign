@@ -2,16 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.studio.meowtoon.animesign</groupId>
     <artifactId>animesign-webapp</artifactId>
     <packaging>war</packaging>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <name>animesign-webapp</name>
-    
+
     <properties>
-        <animesign.version>1.0</animesign.version>
+        <animesign.version>1.0.0</animesign.version>
         <dozer.version>5.3.2</dozer.version>
         <spring.version>3.1.2.RELEASE</spring.version>
         <spring.security.version>3.1.0.RELEASE</spring.security.version>
@@ -21,11 +21,11 @@
         <java.version>1.6</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+
     <dependencies>
         <!--///////////////////////////////////////////////////////////////////////////-->
         <!-- USER LIB -->
-        
+
         <dependency>
             <groupId>com.studio.meowtoon.animesign</groupId>
             <artifactId>animesign-mvc</artifactId>
@@ -41,24 +41,24 @@
             <artifactId>animesign-data</artifactId>
             <version>${animesign.version}</version>
         </dependency>
-        
+
         <!--///////////////////////////////////////////////////////////////////////////-->
         <!-- OSS LIB -->
-        
+
         <!-- @Inject -->
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <version>1</version>
         </dependency>
-        
+
         <!-- Dozer -->
         <dependency>
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer</artifactId>
             <version>${dozer.version}</version>
         </dependency>
-        
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -93,7 +93,7 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
-        
+
         <!-- Hibernate Validator -->
         <dependency>
             <groupId>javax.validation</groupId>
@@ -105,7 +105,7 @@
             <artifactId>hibernate-validator</artifactId>
             <version>4.2.0.Final</version>
         </dependency>
-        
+
         <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -117,21 +117,21 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
-        
+
         <!-- HSQLDB -->
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <version>2.0.0</version>
         </dependency>
-        
+
         <!-- PostgreSQL -->
         <dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>8.4-702.jdbc4</version>
         </dependency>
-        
+
         <!-- Servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -150,14 +150,14 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-        
+
         <!-- Tiles -->
         <dependency>
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-jsp</artifactId>
             <version>${tiles.version}</version>
         </dependency>
-        
+
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -182,7 +182,7 @@
             <version>1.2.16</version>
             <scope>runtime</scope>
         </dependency>
-        
+
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>
@@ -190,9 +190,9 @@
             <version>4.8.2</version>
             <scope>test</scope>
         </dependency>
-        
+
     </dependencies>
-    
+
     <!-- for Hibernate Validator -->
     <repositories>
         <repository>
@@ -200,7 +200,7 @@
             <url>http://repository.jboss.org/nexus/content/groups/public/</url>
         </repository>
     </repositories>
-    
+
     <build>
         <finalName>animesign</finalName>
         <plugins>
@@ -240,12 +240,12 @@
                 <configuration>
                     <contextPath>/animesign</contextPath>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <connectors> 
-                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector"> 
-                            <port>8080</port> 
-                            <maxIdleTime>60000</maxIdleTime> 
-                        </connector> 
-                    </connectors> 
+                    <connectors>
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>8080</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
                 </configuration>
             </plugin>
         </plugins>
@@ -258,5 +258,5 @@
             </resource>
         </resources>
     </build>
-    
+
 </project>
