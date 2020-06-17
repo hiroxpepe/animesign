@@ -34,7 +34,7 @@ public interface ResourceRepository extends JpaRepository<Resource, Long> {
 
     List<Resource> findByUseOrderByIdAsc(boolean use);
 
-    Resource findByOptionsLike(String options);
+    List<Resource> findByOptions(String options); // FIXME: Like is unable to use why?
 
     Resource findByAttrId(String attrId); // FIXME: 1つではない場合
 

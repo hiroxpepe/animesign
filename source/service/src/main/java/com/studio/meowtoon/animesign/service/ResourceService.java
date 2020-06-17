@@ -68,7 +68,7 @@ public class ResourceService {
     public String getDefaultBackground() {
         try {
             // デフォルト背景のURLを返す
-            Resource resource = repository.findByOptionsLike("default_background=true;");
+            Resource resource = repository.findByOptions("default_background").get(0);
             if (resource != null) {
                 return resource.getAttrSrc();
             } else {

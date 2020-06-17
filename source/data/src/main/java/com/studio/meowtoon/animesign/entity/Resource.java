@@ -39,6 +39,7 @@ public class Resource implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id")
     Long id; // un need @Column(unique=true)
 
     @Column(name="elem")

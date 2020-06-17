@@ -60,7 +60,7 @@ function buildTimeline(basicTimeline) {
 		translateY: {value: 360, duration: 1000},
 		easing: 'easeInOutQuint',
 		complete: function(anim) {
-			showBalloonText('\u3053\u3093\u306b\u3061\u306f\uff01',
+			showBalloonText('Hello, how are\n you doing?',
 			'#balloon-mid-img-L',
 			'#balloon-mid-text-L',
 			null,null);
@@ -105,7 +105,7 @@ function buildTimeline(basicTimeline) {
 		translateY: {value: 360, duration: 1000},
 		easing: 'easeInOutQuint',
 		complete: function(anim) {
-			showBalloonText('\u3069\u3046\u3082\u3002',
+			showBalloonText('Hi, Im fine\n thank you.',
 			'#balloon-mid-img-R',
 			'#balloon-mid-text-R',
 			null,null);
