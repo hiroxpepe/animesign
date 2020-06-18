@@ -19,8 +19,9 @@ package com.studio.meowtoon.animesign.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import javax.inject.Inject;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.context.ApplicationContext;
@@ -34,16 +35,14 @@ import com.studio.meowtoon.animesign.repository.TimelineRepository;
  * @author h.adachi
  */
 @Slf4j
+@RequiredArgsConstructor
 @Service
 public class WriteTimelineService {
 
     ///////////////////////////////////////////////////////////////////////////
     // Field
 
-    @Inject
-    private ApplicationContext context;
-
-    @Inject
+    @NonNull
     private TimelineRepository repository;
 
     ///////////////////////////////////////////////////////////////////////////

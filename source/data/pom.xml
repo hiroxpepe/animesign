@@ -7,7 +7,7 @@
     <groupId>com.studio.meowtoon.animesign</groupId>
     <artifactId>animesign-data</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>animesign-data</name>
 
     <properties>
@@ -17,6 +17,7 @@
         <hibernate.version>5.4.17.Final</hibernate.version>
         <lombok.version>1.18.12</lombok.version>
         <slf4j.version>1.7.30</slf4j.version>
+        <logback.version>1.2.3</logback.version>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -98,10 +99,9 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
-            <scope>runtime</scope>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
         </dependency>
 
         <!--///////////////////////////////////////////////////////////////////////////-->

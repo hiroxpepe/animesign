@@ -16,32 +16,22 @@
 
 package com.studio.meowtoon.animesign.controller;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.dozer.Mapper;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.studio.meowtoon.animesign.entity.Resource;
-import com.studio.meowtoon.animesign.form.ResourceForm;
-import com.studio.meowtoon.animesign.service.ResourceService;
-import com.studio.meowtoon.animesign.service.ResourceImageService;
-import com.studio.meowtoon.animesign.service.WriteTimelineService;
-import com.studio.meowtoon.animesign.service.EasyToRawTimelineService;
-import com.studio.meowtoon.animesign.response.EasyTimelineResponse;
 
 /**
  * @author h.adachi
  */
 @Slf4j
+@RequiredArgsConstructor
 @Controller
 @Scope(value="session")
 public class EditController {
@@ -49,28 +39,8 @@ public class EditController {
     ///////////////////////////////////////////////////////////////////////////
     // Field
 
-    private static final String TIMELINE_RESPONSE_BEAN_ID = "easyTimelineResponse";
-
-    @Inject
-    private HttpServletRequest request = null;
-
-    @Inject
-    private ApplicationContext context = null;
-
-    @Inject
-    private Mapper mapper = null;
-
-    @Inject
-    private ResourceService resourceService = null;
-
-    @Inject
-    private WriteTimelineService writeTimelineService = null;
-
-    @Inject
-    private EasyToRawTimelineService easyToRawTimelineService = null;
-
-    @Inject
-    private ResourceImageService resourceImageService = null;
+    @NonNull
+    private HttpServletRequest request;
 
     ///////////////////////////////////////////////////////////////////////////
     // public methods

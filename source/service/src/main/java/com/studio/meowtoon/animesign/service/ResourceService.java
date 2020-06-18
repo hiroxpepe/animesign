@@ -18,30 +18,29 @@ package com.studio.meowtoon.animesign.service;
 
 import java.util.LinkedList;
 import java.util.List;
-import javax.inject.Inject;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.studio.meowtoon.animesign.entity.Resource;
 import com.studio.meowtoon.animesign.repository.ResourceRepository;
 
+
 /**
  * @author h.adachi
  */
 @Slf4j
+@RequiredArgsConstructor
 @Service
 public class ResourceService {
 
     ///////////////////////////////////////////////////////////////////////////
     // Field
 
-    @Inject
-    private ApplicationContext context;
-
-    @Inject
+    @NonNull
     private ResourceRepository repository;
 
     ///////////////////////////////////////////////////////////////////////////
@@ -56,7 +55,7 @@ public class ResourceService {
                 return list;
             } else {
                 log.warn("resource list is empty.");
-                return new LinkedList<Resource>();
+                return new LinkedList<>();
             }
         } catch (Exception e) {
             log.error(e.getMessage());

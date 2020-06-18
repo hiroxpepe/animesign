@@ -18,7 +18,6 @@ package com.studio.meowtoon.animesign.service;
 
 import java.util.Arrays;
 import java.util.List;
-import javax.inject.Inject;
 
 import lombok.Value;
 import lombok.NonNull;
@@ -39,22 +38,23 @@ import com.studio.meowtoon.animesign.repository.ResourceRepository;
  * @author h.adachi
  */
 @Slf4j
+@RequiredArgsConstructor
 @Service
 public class EasyToRawTimelineService {
 
     ///////////////////////////////////////////////////////////////////////////
     // Field
 
-    @Inject
+    @NonNull
     private ApplicationContext context;
 
-    @Inject
+    @NonNull
     private EasyTimelineRepository easyTimelineRepository;
 
-    @Inject
+    @NonNull
     private TimelineRepository timelineRepository;
 
-    @Inject
+    @NonNull
     private ResourceRepository resourceRepository;
 
     ///////////////////////////////////////////////////////////////////////////
