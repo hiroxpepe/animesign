@@ -7,7 +7,7 @@
     <groupId>com.studio.meowtoon.animesign</groupId>
     <artifactId>animesign-mvc</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>animesign-mvc</name>
 
     <properties>
@@ -35,13 +35,6 @@
 
         <!--///////////////////////////////////////////////////////////////////////////-->
         <!-- OSS LIB -->
-
-        <!-- @Inject -->
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
-        </dependency>
 
         <!-- Commons -->
         <dependency>

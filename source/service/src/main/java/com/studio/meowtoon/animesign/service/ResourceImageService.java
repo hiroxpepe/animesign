@@ -21,12 +21,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import javax.imageio.ImageIO;
-import javax.inject.Inject;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,10 +42,7 @@ public class ResourceImageService {
     ///////////////////////////////////////////////////////////////////////////
     // Field
 
-    @Inject
-    private final ApplicationContext context = null;
-
-    @Inject
+    @NonNull
     private ResourceRepository repository;
 
     ///////////////////////////////////////////////////////////////////////////

@@ -7,7 +7,7 @@
     <groupId>com.studio.meowtoon.animesign</groupId>
     <artifactId>animesign-data</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>animesign-data</name>
 
     <properties>

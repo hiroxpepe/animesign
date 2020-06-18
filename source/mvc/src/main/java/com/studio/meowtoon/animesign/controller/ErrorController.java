@@ -16,8 +16,8 @@
 
 package com.studio.meowtoon.animesign.controller;
 
-import javax.inject.Inject;
-
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -31,6 +31,7 @@ import com.studio.meowtoon.animesign.response.Response;
  * @author h.adachi
  */
 @Slf4j
+@RequiredArgsConstructor
 @Controller
 @Scope(value="session")
 public class ErrorController {
@@ -40,8 +41,8 @@ public class ErrorController {
 
     private static final String RESPONSE_BEAN_ID = "response";
 
-    @Inject
-    private ApplicationContext context = null;
+    @NonNull
+    private ApplicationContext context;
 
     ///////////////////////////////////////////////////////////////////////////
     // public methods

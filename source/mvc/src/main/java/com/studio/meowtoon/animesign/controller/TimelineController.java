@@ -18,9 +18,10 @@ package com.studio.meowtoon.animesign.controller;
 
 import java.util.LinkedList;
 import java.util.List;
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
 import org.springframework.context.ApplicationContext;
@@ -43,6 +44,7 @@ import com.studio.meowtoon.animesign.response.Response;
  * @author h.adachi
  */
 @Slf4j
+@RequiredArgsConstructor
 @Controller
 @Scope(value="session")
 public class TimelineController {
@@ -52,26 +54,26 @@ public class TimelineController {
 
     private static final String RESPONSE_BEAN_ID = "response";
 
-    @Inject
-    private HttpServletRequest request = null;
+    @NonNull
+    private HttpServletRequest request;
 
-    @Inject
-    private ApplicationContext context = null;
+    @NonNull
+    private ApplicationContext context;
 
-    @Inject
-    private Mapper mapper = null;
+    @NonNull
+    private Mapper mapper;
 
-    @Inject
-    private ResourceService resourceService = null;
+    @NonNull
+    private ResourceService resourceService;
 
-    @Inject
-    private WriteTimelineService writeTimelineService = null;
+    @NonNull
+    private WriteTimelineService writeTimelineService;
 
-    @Inject
-    private EasyToRawTimelineService easyToRawTimelineService = null;
+    @NonNull
+    private EasyToRawTimelineService easyToRawTimelineService;
 
-    @Inject
-    private ResourceImageService resourceImageService = null;
+    @NonNull
+    private ResourceImageService resourceImageService;
 
     ///////////////////////////////////////////////////////////////////////////
     // public methods

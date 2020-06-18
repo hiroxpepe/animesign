@@ -19,7 +19,6 @@ package com.studio.meowtoon.animesign.response;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.springframework.context.annotation.Scope;

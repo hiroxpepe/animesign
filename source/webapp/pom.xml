@@ -7,7 +7,7 @@
     <groupId>com.studio.meowtoon.animesign</groupId>
     <artifactId>animesign-webapp</artifactId>
     <packaging>war</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>animesign-webapp</name>
 
     <properties>
