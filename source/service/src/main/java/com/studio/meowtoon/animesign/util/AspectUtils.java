@@ -16,6 +16,7 @@
 
 package com.studio.meowtoon.animesign.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -25,14 +26,8 @@ import org.springframework.util.StopWatch;
 /**
  * @author h.adachi
  */
+@Slf4j
 public class AspectUtils {
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Field
-
-    private static final Log LOG = LogFactory.getLog(
-        AspectUtils.class
-    );
 
     ///////////////////////////////////////////////////////////////////////////
     // public methods
@@ -48,7 +43,7 @@ public class AspectUtils {
         Object object = pjp.proceed();
 
         stopWatch.stop();
-        LOG.info(
+        log.info(
             signature.getDeclaringTypeName() + "." +
             signature.getName() + "(): completed in " +
             stopWatch.getTotalTimeMillis() + " msec."
