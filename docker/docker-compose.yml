@@ -1,10 +1,28 @@
 version: '3'
 services:
+  jetty:
+    image: jetty:9.4.11
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    volumes:
+      - ../source/webapp/target:/var/lib/jetty/webapps
+      - ../source/webapp/data:/var/lib/jetty/data
+      - ../source/webapp/logs:/var/lib/jetty/logs
+      - ../var/www/html:/var/www/html
+    environment:
+      TZ: Asia/Tokyo
+    container_name: animesign_jetty
+
   nginx:
-    image: nginx
+    build: ./nginx
     ports:
       - "80:80"
+    links:
+      - jetty:jetty
+    depends_on:
+      - jetty
     volumes:
-# - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ../var/www/html:/usr/share/nginx/html
     container_name: animesign_nginx

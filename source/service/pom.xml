@@ -8,7 +8,7 @@
     <artifactId>animesign-service</artifactId>
     <packaging>jar</packaging>
     <version>1.0.2</version>
-    <name>animesign-service</name>
+    <name>service</name>
 
     <properties>
         <animesign.version>${version}</animesign.version>
