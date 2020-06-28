@@ -8,7 +8,7 @@
     <artifactId>animesign-mvc</artifactId>
     <packaging>jar</packaging>
     <version>1.0.2</version>
-    <name>animesign-mvc</name>
+    <name>mvc</name>
 
     <properties>
         <animesign.version>${version}</animesign.version>

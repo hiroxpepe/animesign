@@ -8,7 +8,7 @@
     <artifactId>animesign-webapp</artifactId>
     <packaging>war</packaging>
     <version>1.0.2</version>
-    <name>animesign-webapp</name>
+    <name>webapp</name>
 
     <properties>
         <animesign.version>${version}</animesign.version>
@@ -128,6 +128,7 @@
     </repositories>
 
     <build>
+        <!-- path at the jetty container on docker. -->
         <finalName>animesign</finalName>
         <plugins>
             <plugin>

@@ -7,7 +7,7 @@
     <artifactId>animesign-project</artifactId>
     <packaging>pom</packaging>
     <version>1.0.2</version>
-    <name>animesign-project</name>
+    <name>project</name>
 
     <properties>
         <animesign.version>${version}</animesign.version>
