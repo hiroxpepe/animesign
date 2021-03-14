@@ -60,21 +60,21 @@ public class EasyToRawTimelineService {
     ///////////////////////////////////////////////////////////////////////////
     // public Method
 
-    // easyTimeline のデータ処理して timeline に挿入する。
+    // _easyTimeline のデータ処理して timeline に挿入する。
     @Transactional
     public void convertEasyToRaw() {
         try {
-            // easyTimeline のデータのクリアの情報の部分を計算してレコードに追加する
+            // _easyTimeline のデータのクリアの情報の部分を計算してレコードに追加する
             // 全体で Offset が順番通りに並んでないと動かない
 
             // timeline データ全削除
             timelineRepository.deleteAll();
 
-            // easyTimeline データ取得
-            List<EasyTimeline> easyTimelineList = easyTimelineRepository.findAll();
+            // _easyTimeline データ取得
+            List<EasyTimeline> _easyTimelineList = easyTimelineRepository.findAll();
 
             // timeline データ作成
-            createTimeline(easyTimelineList);
+            createTimeline(_easyTimelineList);
 
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -88,16 +88,16 @@ public class EasyToRawTimelineService {
     private long getTotalDuration(List<EasyTimeline> easyTimelineList) {
         try {
             // 全体の尺取得
-            long totalDuration = 0L;
-            for (EasyTimeline easyTimeline : easyTimelineList) {
-                if (easyTimeline.getDurationToClear() != null) {
-                    long duration = easyTimeline.getDelay()+ easyTimeline.getDurationToClear();
-                    if (duration > totalDuration) {
-                        totalDuration = duration;
+            long _totalDuration = 0L;
+            for (EasyTimeline _easyTimeline : easyTimelineList) {
+                if (_easyTimeline.getDurationToClear() != null) {
+                    long _duration = _easyTimeline.getDelay()+ _easyTimeline.getDurationToClear();
+                    if (_duration > _totalDuration) {
+                        _totalDuration = _duration;
                     }
                 }
             }
-            return totalDuration;
+            return _totalDuration;
 
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -113,7 +113,6 @@ public class EasyToRawTimelineService {
             } else {
                 return easyTimeline.getDurationToClear();
             }
-
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);
@@ -123,121 +122,118 @@ public class EasyToRawTimelineService {
     private void createTimeline(List<EasyTimeline> easyTimelineList) {
         try {
             // 全体の尺取得
-            long totalDuration = getTotalDuration(easyTimelineList);
-
-            for (EasyTimeline easyTimeline : easyTimelineList) {
-                log.debug(easyTimeline.toString());
+            long _totalDuration = getTotalDuration(easyTimelineList);
+            for (EasyTimeline _easyTimeline : easyTimelineList) {
+                log.debug(_easyTimeline.toString());
                 ///////////////////////////////////////////////////////////////
                 // 表示処理
-                Timeline timeline1 = context.getBean(Timeline.class);
-                timeline1.setTargets(easyTimeline.getTargets());
-                timeline1.setDelay(easyTimeline.getDelay());
-                timeline1.setOpacityValue(1L);
-                timeline1.setOpacityDuration(500L);
-                timeline1.setTextBody(easyTimeline.getTextBody());
+                Timeline _timeline1 = context.getBean(Timeline.class);
+                _timeline1.setTargets(_easyTimeline.getTargets());
+                _timeline1.setDelay(_easyTimeline.getDelay());
+                _timeline1.setOpacityValue(1L);
+                _timeline1.setOpacityDuration(500L);
+                _timeline1.setTextBody(_easyTimeline.getTextBody());
                 ///////////////////////////////////////////////////////////////
                 // 位置移動の設定
                 // "background" 以外の場合
                 // ※ "title" は移動や回転、拡大縮小したいので固定しない
-                if (!easyTimeline.getTargets().contains("background")) {
-                    Resource resource = resourceRepository.findByAttrId(easyTimeline.getTargets().replace("#", ""));
-                    timeline1.setTranslateXValue((long) convertGridPointToPixelValue(easyTimeline, resource).getX());
-                    timeline1.setTranslateYValue((long) convertGridPointToPixelValue(easyTimeline, resource).getY());
-                    timeline1.setTranslateXDuration(easyTimeline.getTranslateDuration());
-                    timeline1.setTranslateYDuration(easyTimeline.getTranslateDuration());
+                if (!_easyTimeline.getTargets().contains("background")) {
+                    Resource _resource = resourceRepository.findByAttrId(_easyTimeline.getTargets().replace("#", ""));
+                    _timeline1.setTranslateXValue((long) convertGridPointToPixelValue(_easyTimeline, _resource).getX());
+                    _timeline1.setTranslateYValue((long) convertGridPointToPixelValue(_easyTimeline, _resource).getY());
+                    _timeline1.setTranslateXDuration(_easyTimeline.getTranslateDuration());
+                    _timeline1.setTranslateYDuration(_easyTimeline.getTranslateDuration());
                 }
                 ///////////////////////////////////////////////////////////////
                 // 回転の設定
-                if (easyTimeline.getRotateValue() != null) {
-                    timeline1.setRotateValue(easyTimeline.getRotateValue());
-                    timeline1.setRotateDuration(easyTimeline.getTranslateDuration());
-                    timeline1.setRotateEasing("easeInOutQuint");
+                if (_easyTimeline.getRotateValue() != null) {
+                    _timeline1.setRotateValue(_easyTimeline.getRotateValue());
+                    _timeline1.setRotateDuration(_easyTimeline.getTranslateDuration());
+                    _timeline1.setRotateEasing("easeInOutQuint");
                 }
                 ///////////////////////////////////////////////////////////////
                 // 拡大縮小の設定
-                if (easyTimeline.getScaleMark() != null) {
-                    String scaleMark = easyTimeline.getScaleMark();
-                    if (scaleMark.contains("+")) {
-                        if (scaleMark.equals("+")) {
-                            timeline1.setScaleValue(1.1F);
+                if (_easyTimeline.getScaleMark() != null) {
+                    String _scaleMark = _easyTimeline.getScaleMark();
+                    if (_scaleMark.contains("+")) {
+                        if (_scaleMark.equals("+")) {
+                            _timeline1.setScaleValue(1.1F);
                         }
-                        if (scaleMark.equals("++")) {
-                            timeline1.setScaleValue(1.5F);
+                        if (_scaleMark.equals("++")) {
+                            _timeline1.setScaleValue(1.5F);
                         }
-                        if (scaleMark.equals("+++")) {
-                            timeline1.setScaleValue(2.0F);
+                        if (_scaleMark.equals("+++")) {
+                            _timeline1.setScaleValue(2.0F);
                         }
-                        timeline1.setScaleDuration(getComplementedDurationToClear(easyTimeline, totalDuration));
-                        timeline1.setScaleEasing("linear");
+                        _timeline1.setScaleDuration(getComplementedDurationToClear(_easyTimeline, _totalDuration));
+                        _timeline1.setScaleEasing("linear");
                     }
-                    if (scaleMark.contains("-")) {
-                        if (scaleMark.equals("-")) {
-                            timeline1.setScaleValue(0.9F);
+                    if (_scaleMark.contains("-")) {
+                        if (_scaleMark.equals("-")) {
+                            _timeline1.setScaleValue(0.9F);
                         }
-                        if (scaleMark.equals("--")) {
-                            timeline1.setScaleValue(0.75F);
+                        if (_scaleMark.equals("--")) {
+                            _timeline1.setScaleValue(0.75F);
                         }
-                        if (scaleMark.equals("---")) {
-                            timeline1.setScaleValue(0.5F);
+                        if (_scaleMark.equals("---")) {
+                            _timeline1.setScaleValue(0.5F);
                         }
-                        timeline1.setScaleDuration(getComplementedDurationToClear(easyTimeline, totalDuration));
-                        timeline1.setScaleEasing("linear");
+                        _timeline1.setScaleDuration(getComplementedDurationToClear(_easyTimeline, _totalDuration));
+                        _timeline1.setScaleEasing("linear");
                     }
                 }
                 ///////////////////////////////////////////////////////////////
                 // その他の設定
                 // "background" でも "scroll" でもない場合
-                if (!easyTimeline.getTargets().contains("background") && !easyTimeline.getTargets().contains("scroll")) {
-                    timeline1.setEasing("easeInOutQuint");
-                    timeline1.setKind("show-object");
+                if (!_easyTimeline.getTargets().contains("background") && !_easyTimeline.getTargets().contains("scroll")) {
+                    _timeline1.setEasing("easeInOutQuint");
+                    _timeline1.setKind("show-object");
                 }
                 // "scroll" の場合
-                else if (easyTimeline.getTargets().contains("scroll")) {
-                    timeline1.setEasing("linear");
-                    timeline1.setKind("show-scroll");
+                else if (_easyTimeline.getTargets().contains("scroll")) {
+                    _timeline1.setEasing("linear");
+                    _timeline1.setKind("show-scroll");
                 // "background" の場合
-                } else if (easyTimeline.getTargets().contains("background")) {
-                    timeline1.setDuration(0L);
-                    timeline1.setEasing("linear");
-                    timeline1.setKind("show-background");
+                } else if (_easyTimeline.getTargets().contains("background")) {
+                    _timeline1.setDuration(0L);
+                    _timeline1.setEasing("linear");
+                    _timeline1.setKind("show-background");
                 }
                 ///////////////////////////////////////////////////////////////
                 // 画像リソースを変更することが出来る TODO: オブジェクトでは？
-                timeline1.setSrc(easyTimeline.getSrc());
-                timeline1.setUse(easyTimeline.isUse());
-                timelineRepository.save(timeline1);
+                _timeline1.setSrc(_easyTimeline.getSrc());
+                _timeline1.setUse(_easyTimeline.isUse());
+                timelineRepository.save(_timeline1);
 
                 ///////////////////////////////////////////////////////////////
                 // 消去処理
-                if (easyTimeline.getDurationToClear() != null) {
-                    Timeline timeline2 = context.getBean(Timeline.class);
-                    Resource resource = resourceRepository.findByAttrId(easyTimeline.getTargets().replace("#", ""));
-                    timeline2.setTargets(easyTimeline.getTargets());
-                    timeline2.setDelay(
-                        easyTimeline.getDelay() +
-                        getComplementedDurationToClear(easyTimeline, totalDuration)
+                if (_easyTimeline.getDurationToClear() != null) {
+                    Timeline _timeline2 = context.getBean(Timeline.class);
+                    Resource _resource = resourceRepository.findByAttrId(_easyTimeline.getTargets().replace("#", ""));
+                    _timeline2.setTargets(_easyTimeline.getTargets());
+                    _timeline2.setDelay(_easyTimeline.getDelay() +
+                        getComplementedDurationToClear(_easyTimeline, _totalDuration)
                     );
-                    timeline2.setOpacityValue(0L);
-                    timeline2.setOpacityDuration(500L);
-                    timeline2.setEasing("linear");
-                    timeline2.setKind("hide-object");
-                    timeline2.setUse(easyTimeline.isUse());
-                    timelineRepository.save(timeline2);
+                    _timeline2.setOpacityValue(0L);
+                    _timeline2.setOpacityDuration(500L);
+                    _timeline2.setEasing("linear");
+                    _timeline2.setKind("hide-object");
+                    _timeline2.setUse(_easyTimeline.isUse());
+                    timelineRepository.save(_timeline2);
                     // 消してから初期位置に移動
-                    Timeline timeline3 = context.getBean(Timeline.class);
-                    timeline3.setTargets(easyTimeline.getTargets());
-                    timeline3.setDelay(
-                        easyTimeline.getDelay() +
-                        getComplementedDurationToClear(easyTimeline, totalDuration) + 1000 // 1秒後
+                    Timeline _timeline3 = context.getBean(Timeline.class);
+                    _timeline3.setTargets(_easyTimeline.getTargets());
+                    _timeline3.setDelay(_easyTimeline.getDelay() +
+                        getComplementedDurationToClear(_easyTimeline, _totalDuration) + 1000 // 1秒後
                     );
-                    timeline3.setTranslateXValue((long) getDefaultPositionValue(resource).getX());
-                    timeline3.setTranslateYValue((long) getDefaultPositionValue(resource).getY());
-                    timeline3.setTranslateXDuration(0L);
-                    timeline3.setTranslateYDuration(0L);
-                    timeline3.setEasing("linear");
-                    timeline3.setKind("init-object");
-                    timeline3.setUse(easyTimeline.isUse());
-                    timelineRepository.save(timeline3);
+                    _timeline3.setTranslateXValue((long) getDefaultPositionValue(_resource).getX());
+                    _timeline3.setTranslateYValue((long) getDefaultPositionValue(_resource).getY());
+                    _timeline3.setTranslateXDuration(0L);
+                    _timeline3.setTranslateYDuration(0L);
+                    _timeline3.setEasing("linear");
+                    _timeline3.setKind("init-object");
+                    _timeline3.setUse(_easyTimeline.isUse());
+                    timelineRepository.save(_timeline3);
                 }
             }
         } catch (Exception e) {
@@ -251,76 +247,76 @@ public class EasyToRawTimelineService {
     private Point getDefaultPositionValue(Resource resource) {
 
         // 対象リソースの矩形縦横
-        Rect rect = new Rect(
+        Rect _rect = new Rect(
             resource.getAttrSrcWidth(),
             resource.getAttrSrcHeight()
         );
 
         // CSS クラスの文字列
-        String attrClass = resource.getAttrClass();
+        String _attrClass = resource.getAttrClass();
 
         // 矩形の初期位置取得
-        PointHelper pointHelper = new PointHelper(attrClass, rect);
-        return pointHelper.getDefaultPoint();
+        PointHelper _pointHelper = new PointHelper(_attrClass, _rect);
+        return _pointHelper.getDefaultPoint();
     }
 
     // 元々配置してある位置からグリッドポイントに移動するには上下左右を計算で出す
     private Point convertGridPointToPixelValue(EasyTimeline easyTimeline, Resource resource) {
 
         // 対象リソースの矩形縦横
-        Rect rect = new Rect(
+        Rect _rect = new Rect(
             resource.getAttrSrcWidth(),
             resource.getAttrSrcHeight()
         );
 
         // CSS クラスの文字列
-        String attrClass = resource.getAttrClass();
+        String _attrClass = resource.getAttrClass();
 
         ///////////////////////////////////////////////////////////////////////
-        // グリッドのある地点からある地点に移動する rect を計算する
+        // グリッドのある地点からある地点に移動する _rect を計算する
 
         // 矩形の初期位置の中心ポイント取得
-        PointHelper pointHelper = new PointHelper(attrClass, rect);
-        Point centerOfStartPoint = pointHelper.getCenterPoint();
-        log.trace("centerOfStartPoint: " + centerOfStartPoint.toString());
+        PointHelper _pointHelper = new PointHelper(_attrClass, _rect);
+        Point _centerOfStartPoint = _pointHelper.getCenterPoint();
+        log.trace("centerOfStartPoint: " + _centerOfStartPoint.toString());
 
         // 矩形の移動後の中心ポイント取得
-        Point centerOfEndPoint = new Point(
+        Point _centerOfEndPoint = new Point(
             Float.valueOf(easyTimeline.getTranslateGridPointX()) * 120,
             Float.valueOf(easyTimeline.getTranslateGridPointY()) * 120
         );
-        log.trace("centerOfEndPoint: " + centerOfEndPoint.toString());
+        log.trace("centerOfEndPoint: " + _centerOfEndPoint.toString());
 
         // 矩形を移動する為の値取得
-        Point pointToMove = getVectorOfMove(centerOfStartPoint, centerOfEndPoint);
-        log.trace("pointToMove: " + pointToMove.toString());
+        Point _pointToMove = getVectorOfMove(_centerOfStartPoint, _centerOfEndPoint);
+        log.trace("pointToMove: " + _pointToMove.toString());
 
         // 移動する値を返す
-        float translateValueX = pointToMove.getX();
-        float translateValueY = pointToMove.getY();
+        float _translateValueX = _pointToMove.getX();
+        float _translateValueY = _pointToMove.getY();
         return new Point(
-            translateValueX,
-            translateValueY
+            _translateValueX,
+            _translateValueY
         );
     }
 
     private Point getVectorOfMove(Point centerPointOfStart, Point centerPointOfEnd) {
         // X軸
-        float moveX;
-        float startX = centerPointOfStart.getX();
-        float endX = centerPointOfEnd.getX();
-        moveX = endX - startX;
+        float _moveX;
+        float _startX = centerPointOfStart.getX();
+        float _endX = centerPointOfEnd.getX();
+        _moveX = _endX - _startX;
 
         // Y軸
-        float moveY;
-        float startY = centerPointOfStart.getY();
-        float endY = centerPointOfEnd.getY();
-        moveY = endY - startY;
+        float _moveY;
+        float _startY = centerPointOfStart.getY();
+        float _endY = centerPointOfEnd.getY();
+        _moveY = _endY - _startY;
 
         // 移動する値を返す
         return new Point(
-            moveX,
-            moveY
+            _moveX,
+            _moveY
         );
     }
 
@@ -342,10 +338,10 @@ public class EasyToRawTimelineService {
         // 矩形の中心位置取得
         public Point getCenterPoint() {
             // 初期位置に自分の矩形の 幅/2、高さ/2 を足す
-            Point init = getDefaultPoint();
+            Point _init = getDefaultPoint();
             return new Point(
-                init.getX() + (rect.getWidth() / 2),
-                init.getY() + (rect.getHeight() / 2)
+                _init.getX() + (rect.getWidth() / 2),
+                _init.getY() + (rect.getHeight() / 2)
             );
         }
 
@@ -353,60 +349,60 @@ public class EasyToRawTimelineService {
         public Point getDefaultPoint() {
 
             // CSSクラス取得
-            String search = getCssClassofStartPosition();
+            String _search = getCssClassofStartPosition();
 
             // 矩形の縦横
-            float width = rect.getWidth();
-            float height = rect.getHeight();
+            float _width = rect.getWidth();
+            float _height = rect.getHeight();
 
             // CSSクラスにより矩形の初期配置を取得する
             // ※CSSに書いてある値とは連動していない
             // TODO: CSSの自動生成
-            if (search.contains("left-top")) {
-                float x = -(width / 2);
-                float y = -(height / 2);
-                log.trace("left-top: x:" + x + ", y:" + y);
-                return new Point(x, y);
-            } else if (search.contains("left-center")) {
-                float x = -(width / 2);
-                float y = (1080 - height) / 2;
-                log.trace("left-center: x:" + x + ", y:" + y);
-                return new Point(x, y);
-            } else if (search.contains("left-bottom")) {
-                float x = -(width / 2);
-                float y = (1080 - (height / 2));
-                log.trace("left-bottom: x:" + x + ", y:" + y);
-                return new Point(x, y);
-            } else if (search.contains("center-top")) {
-                float x = (1920 - width) / 2;
-                float y = -(height / 2);
-                log.trace("center-top: x:" + x + ", y:" + y);
-                return new Point(x, y);
-            } else if (search.contains("center-center")) {
-                float x = (1920 - width) / 2;
-                float y = (1080 - height) / 2;
-                log.trace("center-center: x:" + x + ", y:" + y);
-                return new Point(x, y);
-            } else if (search.contains("center-bottom")) {
-                float x = (1920 - width) / 2;
-                float y = (1080 - (height / 2));
-                log.trace("center-bottom: x:" + x + ", y:" + y);
-                return new Point(x, y);
-            } else if (search.contains("right-top")) {
-                float x = (1920 - (width / 2));
-                float y = -(height / 2);
-                log.trace("right-top: x:" + x + ", y:" + y);
-                return new Point(x, y);
-            } else if (search.contains("right-center")) {
-                float x = (1920 - (width / 2));
-                float y = (1080 - height) / 2;
-                log.trace("right-center: x:" + x + ", y:" + y);
-                return new Point(x, y);
-            } else if (search.contains("right-bottom")) {
-                float x = (1920 - (width / 2));
-                float y = (1080 - (height / 2));
-                log.trace("right-bottom: x:" + x + ", y:" + y);
-                return new Point(x, y);
+            if (_search.contains("left-top")) {
+                float _x = -(_width / 2);
+                float _y = -(_height / 2);
+                log.trace("left-top: x:" + _x + ", y:" + _y);
+                return new Point(_x, _y);
+            } else if (_search.contains("left-center")) {
+                float _x = -(_width / 2);
+                float _y = (1080 - _height) / 2;
+                log.trace("left-center: x:" + _x + ", y:" + _y);
+                return new Point(_x, _y);
+            } else if (_search.contains("left-bottom")) {
+                float _x = -(_width / 2);
+                float _y = (1080 - (_height / 2));
+                log.trace("left-bottom: x:" + _x + ", y:" + _y);
+                return new Point(_x, _y);
+            } else if (_search.contains("center-top")) {
+                float _x = (1920 - _width) / 2;
+                float _y = -(_height / 2);
+                log.trace("center-top: x:" + _x + ", y:" + _y);
+                return new Point(_x, _y);
+            } else if (_search.contains("center-center")) {
+                float _x = (1920 - _width) / 2;
+                float _y = (1080 - _height) / 2;
+                log.trace("center-center: x:" + _x + ", y:" + _y);
+                return new Point(_x, _y);
+            } else if (_search.contains("center-bottom")) {
+                float _x = (1920 - _width) / 2;
+                float _y = (1080 - (_height / 2));
+                log.trace("center-bottom: x:" + _x + ", y:" + _y);
+                return new Point(_x, _y);
+            } else if (_search.contains("right-top")) {
+                float _x = (1920 - (_width / 2));
+                float _y = -(_height / 2);
+                log.trace("right-top: x:" + _x + ", y:" + _y);
+                return new Point(_x, _y);
+            } else if (_search.contains("right-center")) {
+                float _x = (1920 - (_width / 2));
+                float _y = (1080 - _height) / 2;
+                log.trace("right-center: x:" + _x + ", y:" + _y);
+                return new Point(_x, _y);
+            } else if (_search.contains("right-bottom")) {
+                float _x = (1920 - (_width / 2));
+                float _y = (1080 - (_height / 2));
+                log.trace("right-bottom: x:" + _x + ", y:" + _y);
+                return new Point(_x, _y);
             }
             return null;
         }
@@ -417,23 +413,23 @@ public class EasyToRawTimelineService {
         private String getCssClassofStartPosition() {
             // " " で分割して以下のような形式のCSSクラスを探す
             // left-top-720px-960px
-            String[] attrClassArray = attrClass.split(" ");
-            List<String> attrClassList = Arrays.asList(attrClassArray);
-            String search = null;
-            for (String cssClass : attrClassList) {
-                if (cssClass.contains("left") || cssClass.contains("right") ||
-                    cssClass.contains("top") || cssClass.contains("bottom") ||
-                    cssClass.contains("center")
+            String[] _attrClassArray = attrClass.split(" ");
+            List<String> _attrClassList = Arrays.asList(_attrClassArray);
+            String _search = null;
+            for (String _cssClass : _attrClassList) {
+                if (_cssClass.contains("left") || _cssClass.contains("right") ||
+                    _cssClass.contains("top") || _cssClass.contains("bottom") ||
+                    _cssClass.contains("center")
                 ) {
-                    search = cssClass;
+                    _search = _cssClass;
                     break;
                 }
             }
-            if (search == null) {
+            if (_search == null) {
                 log.warn("search is null...");
                 return null;
             }
-            return search;
+            return _search;
         }
     }
 
@@ -485,5 +481,4 @@ public class EasyToRawTimelineService {
             return height / 120;
         }
     }
-
 }

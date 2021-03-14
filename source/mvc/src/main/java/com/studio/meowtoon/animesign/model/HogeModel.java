@@ -32,5 +32,4 @@ public class HogeModel implements Serializable {
     private Long id;
 
     private String name;
-
 }

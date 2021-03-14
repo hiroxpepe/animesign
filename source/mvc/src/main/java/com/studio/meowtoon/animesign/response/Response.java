@@ -43,5 +43,4 @@ public class Response {
 
     @NonNull
     private String message;
-
 }

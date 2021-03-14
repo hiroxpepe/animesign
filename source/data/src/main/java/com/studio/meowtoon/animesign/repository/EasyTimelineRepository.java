@@ -27,5 +27,4 @@ import com.studio.meowtoon.animesign.entity.EasyTimeline;
  */
 @Repository
 public interface EasyTimelineRepository extends JpaRepository<EasyTimeline, Long> {
-
 }

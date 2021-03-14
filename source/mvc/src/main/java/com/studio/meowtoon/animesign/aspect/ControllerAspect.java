@@ -35,8 +35,7 @@ public class ControllerAspect {
 
     @Around("execution(public * com.studio.meowtoon.animesign.controller.*.*(..))")
     public Object aroundForController(ProceedingJoinPoint pjp) throws Throwable {
-        Object object = AspectUtils.getExecutedMsec(pjp);
-        return object;
+        Object _obj = AspectUtils.getExecutedMsec(pjp);
+        return _obj;
     }
-
 }

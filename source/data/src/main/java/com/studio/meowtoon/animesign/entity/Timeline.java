@@ -107,5 +107,4 @@ public class Timeline implements Serializable {
 
     @Column(name="use")
     boolean use;
-
 }

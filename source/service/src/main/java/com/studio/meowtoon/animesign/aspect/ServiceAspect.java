@@ -35,8 +35,7 @@ public class ServiceAspect {
 
     @Around("execution(public * com.studio.meowtoon.animesign.service.*.*(..))")
     public Object aroundForService(ProceedingJoinPoint pjp) throws Throwable {
-        Object object = AspectUtils.getExecutedMsec(pjp);
-        return object;
+        Object _obj = AspectUtils.getExecutedMsec(pjp);
+        return _obj;
     }
-
 }

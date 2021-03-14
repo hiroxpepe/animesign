@@ -80,5 +80,4 @@ public class EasyTimeline implements Serializable {
 
     @Column(name="use")
     boolean use;
-
 }

@@ -65,5 +65,4 @@ public class Resource implements Serializable {
 
     @Column(name="use")
     boolean use;
-
 }

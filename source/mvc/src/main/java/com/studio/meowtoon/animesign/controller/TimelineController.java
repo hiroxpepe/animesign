@@ -89,18 +89,18 @@ public class TimelineController {
     ) {
         log.info("GET request to '/index' from " + request.getRemoteHost());
 
-        // resource のリスト取得
-        List<ResourceForm> resourceFormList = new LinkedList<ResourceForm>();
-        for (Resource resource : resourceService.getResourceList()) {
-            resourceFormList.add(mapper.map(resource, ResourceForm.class));
+        // _resource のリスト取得
+        List<ResourceForm> _resourceFormList = new LinkedList<ResourceForm>();
+        for (Resource _resource : resourceService.getResourceList()) {
+            _resourceFormList.add(mapper.map(_resource, ResourceForm.class));
         }
 
         // デフォルト背景URL取得
-        String defaultBackground = resourceService.getDefaultBackground();
+        String _defaultBackground = resourceService.getDefaultBackground();
 
         // model に対してHTMLで表示するデータをセット
-        model.addAttribute("resourceList", resourceFormList);
-        model.addAttribute("defaultBackground", defaultBackground);
+        model.addAttribute("resourceList", _resourceFormList);
+        model.addAttribute("defaultBackground", _defaultBackground);
     }
 
     // Ajax リクエストを受け、タイムライン再生用の JavaScript ファイルを動的生成する
@@ -127,7 +127,7 @@ public class TimelineController {
     // private methods
 
     private void buildTimeline() {
-        // resource 画像の情報取得
+        // _resource 画像の情報取得
         resourceImageService.getResourceInfo();
 
         // timeline のデータを再構築
@@ -136,5 +136,4 @@ public class TimelineController {
         // timeline 再生用の JavaSctipt ファイルを出力
         writeTimelineService.createJavaScript();
     }
-
 }

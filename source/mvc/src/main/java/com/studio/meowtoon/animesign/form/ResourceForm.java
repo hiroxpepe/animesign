@@ -44,5 +44,4 @@ public class ResourceForm implements Serializable {
     private String attrSrc;
 
     private String options;
-
 }

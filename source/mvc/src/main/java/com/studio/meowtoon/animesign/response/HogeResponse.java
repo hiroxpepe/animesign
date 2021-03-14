@@ -46,5 +46,4 @@ public class HogeResponse extends Response {
         super(isError, message);
         this.hogeModelList = hogeModelList;
     }
-
 }

@@ -28,7 +28,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.studio.meowtoon.animesign.entity.Resource;
 import com.studio.meowtoon.animesign.repository.ResourceRepository;
 
-
 /**
  * @author h.adachi
  */
@@ -50,9 +49,9 @@ public class ResourceService {
     public List<Resource> getResourceList() {
         try {
             // "default-background" は除外
-            List<Resource> list = repository.findByAttrIdNotAndUseOrderByIdAsc("default-background", true);
-            if (list != null) {
-                return list;
+            List<Resource> _list = repository.findByAttrIdNotAndUseOrderByIdAsc("default-background", true);
+            if (_list != null) {
+                return _list;
             } else {
                 log.warn("resource list is empty.");
                 return new LinkedList<>();
@@ -67,9 +66,9 @@ public class ResourceService {
     public String getDefaultBackground() {
         try {
             // デフォルト背景のURLを返す
-            Resource resource = repository.findByOptions("default_background").get(0);
-            if (resource != null) {
-                return resource.getAttrSrc();
+            Resource _resource = repository.findByOptions("default_background").get(0);
+            if (_resource != null) {
+                return _resource.getAttrSrc();
             } else {
                 log.warn("default-background is empty.");
                 return "";
@@ -79,5 +78,4 @@ public class ResourceService {
             throw new RuntimeException(e);
         }
     }
-
 }
