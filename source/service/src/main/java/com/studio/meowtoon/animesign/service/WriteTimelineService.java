@@ -24,7 +24,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,153 +47,152 @@ public class WriteTimelineService {
     ///////////////////////////////////////////////////////////////////////////
     // public Method
 
-    // timeline 再生用の javascript ファイルを動的に
+    // _timeline 再生用の javascript ファイルを動的に
     // 生成してファイル出力する。
     @Transactional
     public void createJavaScript() {
         try {
-            List<Timeline> timelienList = repository.findByUseOrderByDelayAsc(true);
-            if (timelienList == null) {
+            List<Timeline> _timelienList = repository.findByUseOrderByDelayAsc(true);
+            if (_timelienList == null) {
                 log.warn("timelien list is empty.");
                 return;
             }
 
             // JavaScript の関数を動的に作成する
-            String javaScript = addTimeline(timelienList);
-            javaScript += initTimeline(timelienList);
+            String _javaScript = addTimeline(_timelienList);
+            _javaScript += initTimeline(_timelienList);
 
             // ファイル出力
-            writeJavaScript(javaScript);
+            writeJavaScript(_javaScript);
 
         } catch (IOException ex) {
             log.error(ex.getMessage());
             throw new RuntimeException(ex);
         }
-
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // private Method
 
     private String initTimeline(List<Timeline> timelienList) {
-        String javaScript = "function initTimeline() {\n";
-        // timeline リストをループ処理する
-        for (Timeline timeline : timelienList) {
-            if (timeline.getTargets().contains("balloon")) {
-                javaScript += "\t$('" + timeline.getTargets().replace("img", "text") + "').html('')\n";
+        String _javaScript = "function initTimeline() {\n";
+        // _timeline リストをループ処理する
+        for (Timeline _timeline : timelienList) {
+            if (_timeline.getTargets().contains("balloon")) {
+                _javaScript += "\t$('" + _timeline.getTargets().replace("img", "text") + "').html('')\n";
             }
         } // ループ終了
-        javaScript += "}\n";
-        return javaScript;
+        _javaScript += "}\n";
+        return _javaScript;
     }
 
     // JavaScript の関数を動的に作成する
     private String addTimeline(List<Timeline> timelienList) {
-        String javaScript = "function buildTimeline(basicTimeline) {\n";
-        javaScript += "\t" + "basicTimeline.add({\n";
+        String _javaScript = "function buildTimeline(basicTimeline) {\n";
+        _javaScript += "\t" + "basicTimeline.add({\n";
 
         ///////////////////////////////////////////////////////////////////
-        // タイムラインデータの登録: timeline リストをループ処理する
-        for (Timeline timeline : timelienList) {
+        // タイムラインデータの登録: _timeline リストをループ処理する
+        for (Timeline _timeline : timelienList) {
             ///////////////////////////////////////////////////////////////////
             // 背景画像変更パターン
-            if (timeline.getTargets().contains("background")) {
-                javaScript +=
+            if (_timeline.getTargets().contains("background")) {
+                _javaScript +=
                     "\t" + "}).add({\n" +
-                    "\t\t" + "targets: '" + timeline.getTargets() + "',\n" +
-                    "\t\t" + "offset: " + timeline.getDelay() + ",\n" +
-                    "\t\t" + "src: '" + timeline.getSrc() + "',\n" +
-                    "\t\t" + "duration: " + timeline.getDuration() + ",\n" +
-                    "\t\t" + "easing: '" + timeline.getEasing() + "'\n";
+                    "\t\t" + "targets: '" + _timeline.getTargets() + "',\n" +
+                    "\t\t" + "offset: " + _timeline.getDelay() + ",\n" +
+                    "\t\t" + "src: '" + _timeline.getSrc() + "',\n" +
+                    "\t\t" + "duration: " + _timeline.getDuration() + ",\n" +
+                    "\t\t" + "easing: '" + _timeline.getEasing() + "'\n";
                 continue;
             }
             ///////////////////////////////////////////////////////////////////
             // キャラ表示パターン
-            if (!timeline.getTargets().contains("balloon") && timeline.getKind().contains("show")) {
-                javaScript +=
+            if (!_timeline.getTargets().contains("balloon") && _timeline.getKind().contains("show")) {
+                _javaScript +=
                     "\t" + "}).add({\n" +
-                    "\t\t" + "targets: '" + timeline.getTargets() + "',\n" +
-                    "\t\t" + "offset: " + timeline.getDelay() + ",\n" +
-                    "\t\t" + "opacity: {value: " + timeline.getOpacityValue() + ", duration: " + timeline.getOpacityDuration() + "},\n" +
-                    "\t\t" + "translateX: {value: " + timeline.getTranslateXValue() + ", duration: " + timeline.getTranslateXDuration() + "},\n" +
-                    "\t\t" + "translateY: {value: " + timeline.getTranslateYValue() + ", duration: " + timeline.getTranslateYDuration() + "},\n" +
-                    getRotate(timeline) +
-                    getScale(timeline) +
-                    "\t\t" + "easing: '" + timeline.getEasing() + "'\n";
+                    "\t\t" + "targets: '" + _timeline.getTargets() + "',\n" +
+                    "\t\t" + "offset: " + _timeline.getDelay() + ",\n" +
+                    "\t\t" + "opacity: {value: " + _timeline.getOpacityValue() + ", duration: " + _timeline.getOpacityDuration() + "},\n" +
+                    "\t\t" + "translateX: {value: " + _timeline.getTranslateXValue() + ", duration: " + _timeline.getTranslateXDuration() + "},\n" +
+                    "\t\t" + "translateY: {value: " + _timeline.getTranslateYValue() + ", duration: " + _timeline.getTranslateYDuration() + "},\n" +
+                    getRotate(_timeline) +
+                    getScale(_timeline) +
+                    "\t\t" + "easing: '" + _timeline.getEasing() + "'\n";
                 continue;
             }
             ///////////////////////////////////////////////////////////////////
             // キャラ消去パターン
-            if (!timeline.getTargets().contains("balloon") && timeline.getKind().contains("hide")) {
-                javaScript +=
+            if (!_timeline.getTargets().contains("balloon") && _timeline.getKind().contains("hide")) {
+                _javaScript +=
                     "\t" + "}).add({\n" +
-                    "\t\t" + "targets: '" + timeline.getTargets() + "',\n" +
-                    "\t\t" + "offset: " + timeline.getDelay() + ",\n" +
-                    "\t\t" + "opacity: {value: " + timeline.getOpacityValue() + ", duration: " + timeline.getOpacityDuration() + "},\n" +
-                    "\t\t" + "easing: '" + timeline.getEasing() + "'\n";
+                    "\t\t" + "targets: '" + _timeline.getTargets() + "',\n" +
+                    "\t\t" + "offset: " + _timeline.getDelay() + ",\n" +
+                    "\t\t" + "opacity: {value: " + _timeline.getOpacityValue() + ", duration: " + _timeline.getOpacityDuration() + "},\n" +
+                    "\t\t" + "easing: '" + _timeline.getEasing() + "'\n";
                 continue;
             }
             ///////////////////////////////////////////////////////////////////
             // キャラ初期位置移動パターン
-            if (!timeline.getTargets().contains("balloon") && timeline.getKind().contains("init")) {
-                javaScript +=
+            if (!_timeline.getTargets().contains("balloon") && _timeline.getKind().contains("init")) {
+                _javaScript +=
                     "\t" + "}).add({\n" +
-                    "\t\t" + "targets: '" + timeline.getTargets() + "',\n" +
-                    "\t\t" + "offset: " + timeline.getDelay() + ",\n" +
-                    "\t\t" + "translateX: {value: " + timeline.getTranslateXValue() + ", duration: " + timeline.getTranslateXDuration() + "},\n" +
-                    "\t\t" + "translateY: {value: " + timeline.getTranslateYValue() + ", duration: " + timeline.getTranslateYDuration() + "},\n" +
-                    "\t\t" + "easing: '" + timeline.getEasing() + "'\n";
+                    "\t\t" + "targets: '" + _timeline.getTargets() + "',\n" +
+                    "\t\t" + "offset: " + _timeline.getDelay() + ",\n" +
+                    "\t\t" + "translateX: {value: " + _timeline.getTranslateXValue() + ", duration: " + _timeline.getTranslateXDuration() + "},\n" +
+                    "\t\t" + "translateY: {value: " + _timeline.getTranslateYValue() + ", duration: " + _timeline.getTranslateYDuration() + "},\n" +
+                    "\t\t" + "easing: '" + _timeline.getEasing() + "'\n";
                 continue;
             }
             ///////////////////////////////////////////////////////////////////
             // 吹き出し表示パターン
-            if (timeline.getTextBody() != null && timeline.getKind().contains("show")) {
-                javaScript +=
+            if (_timeline.getTextBody() != null && _timeline.getKind().contains("show")) {
+                _javaScript +=
                     "\t" + "}).add({\n" +
-                    "\t\t" + "targets: '" + timeline.getTargets() + ", " + timeline.getTargets().replace("img", "text") + "',\n" +
-                    "\t\t" + "offset: " + timeline.getDelay() + ",\n" +
-                    "\t\t" + "opacity: {value: " + timeline.getOpacityValue() + ", duration: " + timeline.getOpacityDuration() + "},\n" +
-                    "\t\t" + "translateX: {value: " + timeline.getTranslateXValue() + ", duration: " + timeline.getTranslateXDuration() + "},\n" +
-                    "\t\t" + "translateY: {value: " + timeline.getTranslateYValue() + ", duration: " + timeline.getTranslateYDuration() + "},\n" +
-                    "\t\t" + "easing: '" + timeline.getEasing() + "',\n" +
+                    "\t\t" + "targets: '" + _timeline.getTargets() + ", " + _timeline.getTargets().replace("img", "text") + "',\n" +
+                    "\t\t" + "offset: " + _timeline.getDelay() + ",\n" +
+                    "\t\t" + "opacity: {value: " + _timeline.getOpacityValue() + ", duration: " + _timeline.getOpacityDuration() + "},\n" +
+                    "\t\t" + "translateX: {value: " + _timeline.getTranslateXValue() + ", duration: " + _timeline.getTranslateXDuration() + "},\n" +
+                    "\t\t" + "translateY: {value: " + _timeline.getTranslateYValue() + ", duration: " + _timeline.getTranslateYDuration() + "},\n" +
+                    "\t\t" + "easing: '" + _timeline.getEasing() + "',\n" +
                     "\t\t" + "complete: function(anim) {\n" +
-                        "\t\t\t" + "showBalloonText('" + timeline.getTextBody() + "',\n" +
-                        "\t\t\t'" + timeline.getTargets() + "',\n" +
-                        "\t\t\t'" + timeline.getTargets().replace("img", "text") + "',\n" +
-                        "\t\t\t" + timeline.getTextX() + "," + timeline.getTextY()  + ");\n" +
+                        "\t\t\t" + "showBalloonText('" + _timeline.getTextBody() + "',\n" +
+                        "\t\t\t'" + _timeline.getTargets() + "',\n" +
+                        "\t\t\t'" + _timeline.getTargets().replace("img", "text") + "',\n" +
+                        "\t\t\t" + _timeline.getTextX() + "," + _timeline.getTextY()  + ");\n" +
                     "\t\t" + "}\n";
                 continue;
             }
             ///////////////////////////////////////////////////////////////////
             // 吹き出し消去パターン
-            if (timeline.getTargets().contains("balloon") && timeline.getKind().contains("hide")) {
-                javaScript +=
+            if (_timeline.getTargets().contains("balloon") && _timeline.getKind().contains("hide")) {
+                _javaScript +=
                     "\t" + "}).add({\n" +
-                    "\t\t" + "targets: '" + timeline.getTargets() + ", " + timeline.getTargets().replace("img", "text") + "',\n" +
-                    "\t\t" + "offset: " + timeline.getDelay() + ",\n" +
-                    "\t\t" + "opacity: {value: " + timeline.getOpacityValue() + ", duration: " + timeline.getOpacityDuration() + "},\n" +
-                    "\t\t" + "easing: '" + timeline.getEasing() + "',\n" +
+                    "\t\t" + "targets: '" + _timeline.getTargets() + ", " + _timeline.getTargets().replace("img", "text") + "',\n" +
+                    "\t\t" + "offset: " + _timeline.getDelay() + ",\n" +
+                    "\t\t" + "opacity: {value: " + _timeline.getOpacityValue() + ", duration: " + _timeline.getOpacityDuration() + "},\n" +
+                    "\t\t" + "easing: '" + _timeline.getEasing() + "',\n" +
                     "\t\t" + "complete: function(anim) {\n" +
-                        "\t\t\t" + "hideBalloonText('" + timeline.getTargets().replace("img", "text") + "');\n" +
+                        "\t\t\t" + "hideBalloonText('" + _timeline.getTargets().replace("img", "text") + "');\n" +
                     "\t\t" + "}\n";
                 continue;
             }
             ///////////////////////////////////////////////////////////////////
             // 吹き出し初期位置移動パターン
-            if (timeline.getTargets().contains("balloon") && timeline.getKind().contains("init")) {
-                javaScript +=
+            if (_timeline.getTargets().contains("balloon") && _timeline.getKind().contains("init")) {
+                _javaScript +=
                     "\t" + "}).add({\n" +
-                    "\t\t" + "targets: '" + timeline.getTargets() + ", " + timeline.getTargets().replace("img", "text") + "',\n" +
-                    "\t\t" + "offset: " + timeline.getDelay() + ",\n" +
-                    "\t\t" + "translateX: {value: " + timeline.getTranslateXValue() + ", duration: " + timeline.getTranslateXDuration() + "},\n" +
-                    "\t\t" + "translateY: {value: " + timeline.getTranslateYValue() + ", duration: " + timeline.getTranslateYDuration() + "},\n" +
-                    "\t\t" + "easing: '" + timeline.getEasing() + "'\n";
+                    "\t\t" + "targets: '" + _timeline.getTargets() + ", " + _timeline.getTargets().replace("img", "text") + "',\n" +
+                    "\t\t" + "offset: " + _timeline.getDelay() + ",\n" +
+                    "\t\t" + "translateX: {value: " + _timeline.getTranslateXValue() + ", duration: " + _timeline.getTranslateXDuration() + "},\n" +
+                    "\t\t" + "translateY: {value: " + _timeline.getTranslateYValue() + ", duration: " + _timeline.getTranslateYDuration() + "},\n" +
+                    "\t\t" + "easing: '" + _timeline.getEasing() + "'\n";
                 continue;
             }
         } // ループ終了
-        javaScript += "\t" + "});\n";
-        javaScript += "}\n";
-        return javaScript;
+        _javaScript += "\t" + "});\n";
+        _javaScript += "}\n";
+        return _javaScript;
     }
 
     // 回転の設定
@@ -216,11 +214,10 @@ public class WriteTimelineService {
     // /var/www/html/animesign-resources/ にファイル書き出し
     private void writeJavaScript(String animeTimeline) throws IOException {
         FileUtils.writeStringToFile(
-            //new File("../../var/www/html/animesign/resources/scripts/animesign.timeline.js"), // 【重要】FIXME: どこから読むか？
+            //new File("../../var/www/html/animesign/resources/scripts/animesign._timeline.js"), // 【重要】FIXME: どこから読むか？
             new File("/var/www/html/animesign/resources/scripts/animesign.timeline.js"),
             animeTimeline,
             "UTF-8"
         );
     }
-
 }

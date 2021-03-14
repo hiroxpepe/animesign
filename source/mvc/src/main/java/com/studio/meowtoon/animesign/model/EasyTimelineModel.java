@@ -58,5 +58,4 @@ public class EasyTimelineModel implements Serializable {
     private Long chunkId;
 
     private boolean use;
-
 }

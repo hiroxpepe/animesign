@@ -29,5 +29,4 @@ public class EasyTimelineResponse extends Response {
     public EasyTimelineResponse(boolean isError, String message) {
         super(isError, message);
     }
-
 }

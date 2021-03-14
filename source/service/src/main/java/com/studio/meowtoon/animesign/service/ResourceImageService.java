@@ -51,19 +51,18 @@ public class ResourceImageService {
     @Transactional
     public void getResourceInfo() {
         try {
-            List<Resource> resourceList = repository.findByUseOrderByIdAsc(true);
-            for (Resource resource : resourceList) {
-                String url = resource.getAttrSrc();
-                if (url == null) {
+            List<Resource> _resourceList = repository.findByUseOrderByIdAsc(true);
+            for (Resource _resource : _resourceList) {
+                String _url = _resource.getAttrSrc();
+                if (_url == null) {
                     continue;
                 }
-                if (resource.getAttrSrcWidth() != null && resource.getAttrSrcHeight() != null) {
+                if (_resource.getAttrSrcWidth() != null && _resource.getAttrSrcHeight() != null) {
                     continue;
                 }
-                log.debug("attrSrc: " + url);
-                request(resource);
+                log.debug("attrSrc: " + _url);
+                request(_resource);
             }
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -73,23 +72,22 @@ public class ResourceImageService {
     // private Method
 
     private void request(Resource resource) {
-        BufferedImage image = null;
+        BufferedImage _image = null;
         try {
-            URL url = new URL(resource.getAttrSrc());
-            image = ImageIO.read(url);
-            if (image == null) {
+            URL _url = new URL(resource.getAttrSrc());
+            _image = ImageIO.read(_url);
+            if (_image == null) {
                 // TODO: log処理
             }
             // リソース画像の縦横のpixel値を取得
-            Integer width = image.getWidth();
-            Integer height = image.getHeight();
-            resource.setAttrSrcWidth(width.longValue());
-            resource.setAttrSrcHeight(height.longValue());
+            Integer _width = _image.getWidth();
+            Integer _height = _image.getHeight();
+            resource.setAttrSrcWidth(_width.longValue());
+            resource.setAttrSrcHeight(_height.longValue());
             repository.save(resource);
         } catch (IOException ioe) {
             log.error(ioe.getMessage());
             throw new RuntimeException(ioe);
         }
     }
-
 }

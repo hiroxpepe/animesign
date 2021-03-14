@@ -31,24 +31,22 @@ public class AspectUtils {
     // public methods
 
     public static Object getExecutedMsec(ProceedingJoinPoint pjp) throws Throwable {
-        StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
+        StopWatch _stopWatch = new StopWatch();
+        _stopWatch.start();
 
         // get the target name.
-        Signature signature = pjp.getSignature();
+        Signature _signature = pjp.getSignature();
 
         // do the process.
-        Object object = pjp.proceed();
+        Object _object = pjp.proceed();
 
-        stopWatch.stop();
-        log.info(
-            signature.getDeclaringTypeName() + "." +
-            signature.getName() + "(): completed in " +
-            stopWatch.getTotalTimeMillis() + " msec."
+        _stopWatch.stop();
+        log.info(_signature.getDeclaringTypeName() + "." +
+            _signature.getName() + "(): completed in " +
+            _stopWatch.getTotalTimeMillis() + " msec."
         );
 
-        // must return the object.
-        return object;
+        // must return the _object.
+        return _object;
     }
-
 }
