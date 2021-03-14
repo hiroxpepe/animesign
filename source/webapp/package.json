@@ -1,17 +1,17 @@
 {
   "name": "animesign-webapp",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "main": "webpack.config.js",
   "dependencies": {
-    "vue": "^2.6.11"
+    "vue": "^2.6.12"
   },
   "devDependencies": {
     "ts-loader": "^7.0.5",
-    "typescript": "^3.9.5",
+    "typescript": "^3.9.9",
     "vue-html-loader": "^1.2.4",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
