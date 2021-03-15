@@ -7,15 +7,15 @@
     "vue": "^2.6.12"
   },
   "devDependencies": {
-    "ts-loader": "^7.0.5",
-    "typescript": "^3.9.9",
+    "ts-loader": "^8.0.18",
+    "typescript": "^4.2.3",
     "vue-html-loader": "^1.2.4",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12"
+    "webpack": "^5.25.1",
+    "webpack-cli": "^4.5.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack --mode production"
   },
   "author": "",
   "license": "ISC"
