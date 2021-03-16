@@ -19,7 +19,6 @@ package com.studio.meowtoon.animesign.service;
 import java.util.Arrays;
 import java.util.List;
 
-import lombok.Value;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -430,55 +429,6 @@ public class EasyToRawTimelineService {
                 return null;
             }
             return _search;
-        }
-    }
-
-    @Value
-    public class Point {
-
-        ///////////////////////////////////////////////////////////////////////
-        // Field
-
-        @NonNull
-        private float x;
-
-        @NonNull
-        private float y;
-
-        ///////////////////////////////////////////////////////////////////////
-        // public methods
-
-        public float getGridX() {
-            return x / 120;
-        }
-
-        public float getGridY() {
-            return y / 120;
-        }
-
-    }
-
-    @Value
-    public class Rect {
-
-        ///////////////////////////////////////////////////////////////////////
-        // Field
-
-        @NonNull
-        private float width;
-
-        @NonNull
-        private float height;
-
-        ///////////////////////////////////////////////////////////////////////
-        // public methods
-
-        public float getGridWidth() {
-            return width / 120;
-        }
-
-        public float getGridHeight() {
-            return height / 120;
         }
     }
 }
