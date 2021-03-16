@@ -16,6 +16,7 @@
 
 package com.studio.meowtoon.animesign.util;
 
+import lombok.val;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -31,7 +32,7 @@ public class AspectUtils {
     // public methods
 
     public static Object getExecutedMsec(ProceedingJoinPoint pjp) throws Throwable {
-        StopWatch _stopWatch = new StopWatch();
+        val _stopWatch = new StopWatch();
         _stopWatch.start();
 
         // get the target name.

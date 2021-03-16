@@ -63,8 +63,8 @@ public class ResourceImageService {
                 log.debug("attrSrc: " + _url);
                 request(_resource);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
         }
     }
 
