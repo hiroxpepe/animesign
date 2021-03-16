@@ -56,9 +56,9 @@ public class ResourceService {
                 log.warn("resource list is empty.");
                 return new LinkedList<>();
             }
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            throw new RuntimeException(e);
+        } catch (Exception ex) {
+            log.error(ex.getMessage());
+            throw new RuntimeException(ex);
         }
     }
 
@@ -73,9 +73,9 @@ public class ResourceService {
                 log.warn("default-background is empty.");
                 return "";
             }
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            throw new RuntimeException(e);
+        } catch (Exception ex) {
+            log.error(ex.getMessage());
+            throw new RuntimeException(ex);
         }
     }
 }

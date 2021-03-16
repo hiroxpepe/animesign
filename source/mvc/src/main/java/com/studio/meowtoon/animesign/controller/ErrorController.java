@@ -51,13 +51,12 @@ public class ErrorController {
     @ExceptionHandler
     @ResponseBody
     public Response handleException(
-        Exception e
+        Exception ex
     ) {
-        log.error(e.getMessage());
-        return (Response) context.getBean(
-            RESPONSE_BEAN_ID,
+        log.error(ex.getMessage());
+        return (Response) context.getBean(RESPONSE_BEAN_ID,
             true,
-            e.getMessage()
+            ex.getMessage()
         );
     }
 }

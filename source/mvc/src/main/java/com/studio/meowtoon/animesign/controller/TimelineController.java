@@ -17,9 +17,9 @@
 package com.studio.meowtoon.animesign.controller;
 
 import java.util.LinkedList;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
+import lombok.val;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.studio.meowtoon.animesign.entity.Resource;
 import com.studio.meowtoon.animesign.form.ResourceForm;
 import com.studio.meowtoon.animesign.service.ResourceService;
 import com.studio.meowtoon.animesign.service.ResourceImageService;
@@ -90,10 +89,10 @@ public class TimelineController {
         log.info("GET request to '/index' from " + request.getRemoteHost());
 
         // _resource のリスト取得
-        List<ResourceForm> _resourceFormList = new LinkedList<ResourceForm>();
-        for (Resource _resource : resourceService.getResourceList()) {
+        val _resourceFormList = new LinkedList<ResourceForm>();
+        resourceService.getResourceList().forEach((_resource) -> {
             _resourceFormList.add(mapper.map(_resource, ResourceForm.class));
-        }
+        });
 
         // デフォルト背景URL取得
         String _defaultBackground = resourceService.getDefaultBackground();
