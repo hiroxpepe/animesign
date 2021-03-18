@@ -6,10 +6,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <%-- jQuery --%>
-        <script src="<c:url value="/docroot/scripts/jquery-3.2.1.min.js"/>"></script>
-        <script src="<c:url value="/docroot/scripts/jquery.loadTemplate.min.js"/>"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <%-- Anime.js --%>
-        <script language="javascript" type="text/javascript" src="<c:url value="/docroot/scripts/anime.min.js"/>"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.1.0/anime.min.js"></script>
         <%-- AnimeSign --%>
         <%--<link rel="shortcut icon" href="<c:url value="/docroot/images/icon.ico"/>" />--%>
         <link rel="stylesheet" type="text/css" href="<c:url value="/docroot/styles/animesign.css"/>" />
