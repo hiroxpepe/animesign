@@ -13,20 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
-export class Hoge {
-    constructor(private name: string, private age: number, private job: string) {
+
+package com.studio.meowtoon.animesign.service;
+
+import lombok.NonNull;
+import lombok.Value;
+
+/**
+ * @author h.adachi
+ */
+@Value
+class Rect {
+
+    ///////////////////////////////////////////////////////////////////////
+    // Field
+
+    @NonNull
+    private float width;
+
+    @NonNull
+    private float height;
+
+    ///////////////////////////////////////////////////////////////////////
+    // public methods
+
+    public float getGridWidth() {
+        return width / 120;
     }
-    getName(): string {
-        return this.name;
-    }
-    getAge(): number {
-        return this.age;
-    }
-    getJob(): string {
-        return this.job;
-    }
-    setJob(job: string) {
-        this.job = job;
+
+    public float getGridHeight() {
+        return height / 120;
     }
 }

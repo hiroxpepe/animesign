@@ -1,18 +1,18 @@
 const path = require('path');
 
 module.exports = {
-    entry: [
-        './src/main/resources/assets/index.ts'
-    ],
+    entry: {
+        core: './src/main/resources/assets/index.ts'
+    },
     output: {
         path: path.join(__dirname, 'src/main/webapp/docroot/scripts'),
-        filename: 'animesign.lib.js'
+        filename: 'animesign.[name].js'
     },
     devtool: 'source-map',
-    // resolve TypeScript and Vue file
+    // resolve TypeScript file
     resolve: {
-        // Add `.ts` and `.vue` as a resolvable extension.
-        extensions: ['.ts', '.vue', '.js', '.html'],
+        // Add `.ts` and 'js' as a resolvable extension.
+        extensions: ['.ts', '.js'],
         alias: {
             vue: 'vue/dist/vue.js'
         }
@@ -30,20 +30,6 @@ module.exports = {
                         }
                     }
                 ]
-            },
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader',
-                options: {
-                    esModule: true
-                }
-            },
-            {
-                test: /\.html$/,
-                loader: 'vue-html-loader',
-                options: {
-                    hmr: false // disables Hot Modules Replacement
-                }
             }
         ]
     }

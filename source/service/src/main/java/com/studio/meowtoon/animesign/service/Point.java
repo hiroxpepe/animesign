@@ -13,14 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
-import { Hoge } from '../entity/Hoge';
-import { StringUtils } from '../util/StringUtils';
 
-export class HogeService {
-    constructor(private hoge: Hoge) {
+package com.studio.meowtoon.animesign.service;
+
+import lombok.NonNull;
+import lombok.Value;
+
+/**
+ * @author h.adachi
+ */
+@Value
+class Point {
+
+    ///////////////////////////////////////////////////////////////////////
+    // Field
+
+    @NonNull
+    private float x;
+
+    @NonNull
+    private float y;
+
+    ///////////////////////////////////////////////////////////////////////
+    // public methods
+
+    public float getGridX() {
+        return x / 120;
     }
-    sayName(): string {
-        return StringUtils.getUpperCase(this.hoge.getName());
+
+    public float getGridY() {
+        return y / 120;
     }
 }

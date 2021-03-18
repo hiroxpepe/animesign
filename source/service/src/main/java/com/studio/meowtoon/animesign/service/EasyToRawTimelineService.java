@@ -16,10 +16,9 @@
 
 package com.studio.meowtoon.animesign.service;
 
-import java.util.Arrays;
 import java.util.List;
 
-import lombok.Value;
+import lombok.val;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -76,9 +75,9 @@ public class EasyToRawTimelineService {
             // timeline データ作成
             createTimeline(_easyTimelineList);
 
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            throw new RuntimeException(e);
+        } catch (Exception ex) {
+            log.error(ex.getMessage());
+            throw new RuntimeException(ex);
         }
     }
 
@@ -99,9 +98,9 @@ public class EasyToRawTimelineService {
             }
             return _totalDuration;
 
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            throw new RuntimeException(e);
+        } catch (Exception ex) {
+            log.error(ex.getMessage());
+            throw new RuntimeException(ex);
         }
     }
 
@@ -113,9 +112,9 @@ public class EasyToRawTimelineService {
             } else {
                 return easyTimeline.getDurationToClear();
             }
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            throw new RuntimeException(e);
+        } catch (Exception ex) {
+            log.error(ex.getMessage());
+            throw new RuntimeException(ex);
         }
     }
 
@@ -236,18 +235,17 @@ public class EasyToRawTimelineService {
                     timelineRepository.save(_timeline3);
                 }
             }
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            throw new RuntimeException(e);
+        } catch (Exception ex) {
+            log.error(ex.getMessage());
+            throw new RuntimeException(ex);
         }
-
     }
 
     // 元々配置してある位置を取得
     private Point getDefaultPositionValue(Resource resource) {
 
         // 対象リソースの矩形縦横
-        Rect _rect = new Rect(
+        val _rect = new Rect(
             resource.getAttrSrcWidth(),
             resource.getAttrSrcHeight()
         );
@@ -256,7 +254,7 @@ public class EasyToRawTimelineService {
         String _attrClass = resource.getAttrClass();
 
         // 矩形の初期位置取得
-        PointHelper _pointHelper = new PointHelper(_attrClass, _rect);
+        val _pointHelper = new PointHelper(_attrClass, _rect);
         return _pointHelper.getDefaultPoint();
     }
 
@@ -264,7 +262,7 @@ public class EasyToRawTimelineService {
     private Point convertGridPointToPixelValue(EasyTimeline easyTimeline, Resource resource) {
 
         // 対象リソースの矩形縦横
-        Rect _rect = new Rect(
+        val _rect = new Rect(
             resource.getAttrSrcWidth(),
             resource.getAttrSrcHeight()
         );
@@ -276,14 +274,14 @@ public class EasyToRawTimelineService {
         // グリッドのある地点からある地点に移動する _rect を計算する
 
         // 矩形の初期位置の中心ポイント取得
-        PointHelper _pointHelper = new PointHelper(_attrClass, _rect);
+        val _pointHelper = new PointHelper(_attrClass, _rect);
         Point _centerOfStartPoint = _pointHelper.getCenterPoint();
         log.trace("centerOfStartPoint: " + _centerOfStartPoint.toString());
 
         // 矩形の移動後の中心ポイント取得
-        Point _centerOfEndPoint = new Point(
-            Float.valueOf(easyTimeline.getTranslateGridPointX()) * 120,
-            Float.valueOf(easyTimeline.getTranslateGridPointY()) * 120
+        val _centerOfEndPoint = new Point(
+            easyTimeline.getTranslateGridPointX() * 120,
+            easyTimeline.getTranslateGridPointY() * 120
         );
         log.trace("centerOfEndPoint: " + _centerOfEndPoint.toString());
 
@@ -318,167 +316,5 @@ public class EasyToRawTimelineService {
             _moveX,
             _moveY
         );
-    }
-
-    @RequiredArgsConstructor
-    public class PointHelper {
-
-        ///////////////////////////////////////////////////////////////////////
-        // Field
-
-        @NonNull
-        String attrClass;
-
-        @NonNull
-        Rect rect;
-
-        ///////////////////////////////////////////////////////////////////////
-        // public methods
-
-        // 矩形の中心位置取得
-        public Point getCenterPoint() {
-            // 初期位置に自分の矩形の 幅/2、高さ/2 を足す
-            Point _init = getDefaultPoint();
-            return new Point(
-                _init.getX() + (rect.getWidth() / 2),
-                _init.getY() + (rect.getHeight() / 2)
-            );
-        }
-
-        // 矩形の初期位置取得
-        public Point getDefaultPoint() {
-
-            // CSSクラス取得
-            String _search = getCssClassofStartPosition();
-
-            // 矩形の縦横
-            float _width = rect.getWidth();
-            float _height = rect.getHeight();
-
-            // CSSクラスにより矩形の初期配置を取得する
-            // ※CSSに書いてある値とは連動していない
-            // TODO: CSSの自動生成
-            if (_search.contains("left-top")) {
-                float _x = -(_width / 2);
-                float _y = -(_height / 2);
-                log.trace("left-top: x:" + _x + ", y:" + _y);
-                return new Point(_x, _y);
-            } else if (_search.contains("left-center")) {
-                float _x = -(_width / 2);
-                float _y = (1080 - _height) / 2;
-                log.trace("left-center: x:" + _x + ", y:" + _y);
-                return new Point(_x, _y);
-            } else if (_search.contains("left-bottom")) {
-                float _x = -(_width / 2);
-                float _y = (1080 - (_height / 2));
-                log.trace("left-bottom: x:" + _x + ", y:" + _y);
-                return new Point(_x, _y);
-            } else if (_search.contains("center-top")) {
-                float _x = (1920 - _width) / 2;
-                float _y = -(_height / 2);
-                log.trace("center-top: x:" + _x + ", y:" + _y);
-                return new Point(_x, _y);
-            } else if (_search.contains("center-center")) {
-                float _x = (1920 - _width) / 2;
-                float _y = (1080 - _height) / 2;
-                log.trace("center-center: x:" + _x + ", y:" + _y);
-                return new Point(_x, _y);
-            } else if (_search.contains("center-bottom")) {
-                float _x = (1920 - _width) / 2;
-                float _y = (1080 - (_height / 2));
-                log.trace("center-bottom: x:" + _x + ", y:" + _y);
-                return new Point(_x, _y);
-            } else if (_search.contains("right-top")) {
-                float _x = (1920 - (_width / 2));
-                float _y = -(_height / 2);
-                log.trace("right-top: x:" + _x + ", y:" + _y);
-                return new Point(_x, _y);
-            } else if (_search.contains("right-center")) {
-                float _x = (1920 - (_width / 2));
-                float _y = (1080 - _height) / 2;
-                log.trace("right-center: x:" + _x + ", y:" + _y);
-                return new Point(_x, _y);
-            } else if (_search.contains("right-bottom")) {
-                float _x = (1920 - (_width / 2));
-                float _y = (1080 - (_height / 2));
-                log.trace("right-bottom: x:" + _x + ", y:" + _y);
-                return new Point(_x, _y);
-            }
-            return null;
-        }
-
-        ///////////////////////////////////////////////////////////////////////
-        // private methods
-
-        private String getCssClassofStartPosition() {
-            // " " で分割して以下のような形式のCSSクラスを探す
-            // left-top-720px-960px
-            String[] _attrClassArray = attrClass.split(" ");
-            List<String> _attrClassList = Arrays.asList(_attrClassArray);
-            String _search = null;
-            for (String _cssClass : _attrClassList) {
-                if (_cssClass.contains("left") || _cssClass.contains("right") ||
-                    _cssClass.contains("top") || _cssClass.contains("bottom") ||
-                    _cssClass.contains("center")
-                ) {
-                    _search = _cssClass;
-                    break;
-                }
-            }
-            if (_search == null) {
-                log.warn("search is null...");
-                return null;
-            }
-            return _search;
-        }
-    }
-
-    @Value
-    public class Point {
-
-        ///////////////////////////////////////////////////////////////////////
-        // Field
-
-        @NonNull
-        private float x;
-
-        @NonNull
-        private float y;
-
-        ///////////////////////////////////////////////////////////////////////
-        // public methods
-
-        public float getGridX() {
-            return x / 120;
-        }
-
-        public float getGridY() {
-            return y / 120;
-        }
-
-    }
-
-    @Value
-    public class Rect {
-
-        ///////////////////////////////////////////////////////////////////////
-        // Field
-
-        @NonNull
-        private float width;
-
-        @NonNull
-        private float height;
-
-        ///////////////////////////////////////////////////////////////////////
-        // public methods
-
-        public float getGridWidth() {
-            return width / 120;
-        }
-
-        public float getGridHeight() {
-            return height / 120;
-        }
     }
 }
