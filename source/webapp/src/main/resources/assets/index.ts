@@ -16,6 +16,8 @@
 
 import Vue from 'vue';
 
+declare var require: any;
+
 window.addEventListener("load", () => {
     const Functions = require('./lib/functions.js')
     new Vue({
