@@ -1,12 +1,12 @@
 const path = require('path');
 
 module.exports = {
-    entry: [
-        './src/main/resources/assets/index.ts'
-    ],
+    entry: {
+        core: './src/main/resources/assets/index.ts'
+    },
     output: {
         path: path.join(__dirname, 'src/main/webapp/docroot/scripts'),
-        filename: 'animesign.core.js'
+        filename: 'animesign.[name].js'
     },
     devtool: 'source-map',
     // resolve TypeScript file

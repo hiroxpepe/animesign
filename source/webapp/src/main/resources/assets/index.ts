@@ -16,22 +16,19 @@
 
 import Vue from 'vue';
 
-declare var onCreated: any;
-declare var onBuild: any;
-declare var onPlay: any;
-
 window.addEventListener("load", () => {
+    const Functions = require('./lib/functions.js')
     new Vue({
         el: '#vue-app',
         created(): void {
-            onCreated();
+            Functions.onCreated();
         },
         methods: {
             Build(): void {
-                onBuild();
+                Functions.onBuild();
             },
             Play(): void {
-                onPlay();
+                Functions.onPlay();
             }
         }
     });
