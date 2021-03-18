@@ -13,7 +13,7 @@
         <%-- AnimeSign --%>
         <%--<link rel="shortcut icon" href="<c:url value="/docroot/images/icon.ico"/>" />--%>
         <link rel="stylesheet" type="text/css" href="<c:url value="/docroot/styles/animesign.css"/>" />
-        <%--<script language="javascript" type="text/javascript" src="<c:url value="/docroot/scripts/animesign.lib.js"/>"></script> webpack ⇒ vue --%>
+        <script language="javascript" type="text/javascript" src="<c:url value="/docroot/scripts/animesign.lib.js"/>"></script>
         <script language="javascript" type="text/javascript" src="<c:url value="/docroot/scripts/animesign.core.js"/>"></script>
         <title>AnimeSign</title>
     </head>

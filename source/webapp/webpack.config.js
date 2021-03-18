@@ -6,7 +6,7 @@ module.exports = {
     ],
     output: {
         path: path.join(__dirname, 'src/main/webapp/docroot/scripts'),
-        filename: 'animesign.lib.js'
+        filename: 'animesign.core.js'
     },
     devtool: 'source-map',
     // resolve TypeScript and Vue file
