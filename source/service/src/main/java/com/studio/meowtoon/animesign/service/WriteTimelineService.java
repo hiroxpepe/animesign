@@ -75,7 +75,7 @@ public class WriteTimelineService {
     // private Method
 
     private String initTimeline(List<Timeline> timelienList) {
-        String _javaScript = "function initTimeline() {\n";
+        String _javaScript = "const initTimeline = () => {\n";
         // _timeline リストをループ処理する
         for (Timeline _timeline : timelienList) {
             if (_timeline.getTargets().contains("balloon")) {
@@ -88,7 +88,7 @@ public class WriteTimelineService {
 
     // JavaScript の関数を動的に作成する
     private String addTimeline(List<Timeline> timelienList) {
-        String _javaScript = "function buildTimeline(basicTimeline) {\n";
+        String _javaScript = "const buildTimeline = (basicTimeline) => {\n";
         _javaScript += "\t" + "basicTimeline.add({\n";
 
         ///////////////////////////////////////////////////////////////////
@@ -155,7 +155,7 @@ public class WriteTimelineService {
                     "\t\t" + "translateX: {value: " + _timeline.getTranslateXValue() + ", duration: " + _timeline.getTranslateXDuration() + "},\n" +
                     "\t\t" + "translateY: {value: " + _timeline.getTranslateYValue() + ", duration: " + _timeline.getTranslateYDuration() + "},\n" +
                     "\t\t" + "easing: '" + _timeline.getEasing() + "',\n" +
-                    "\t\t" + "complete: function(anim) {\n" +
+                    "\t\t" + "complete: (anime) => {\n" +
                         "\t\t\t" + "showBalloonText('" + _timeline.getTextBody() + "',\n" +
                         "\t\t\t'" + _timeline.getTargets() + "',\n" +
                         "\t\t\t'" + _timeline.getTargets().replace("img", "text") + "',\n" +
@@ -172,7 +172,7 @@ public class WriteTimelineService {
                     "\t\t" + "offset: " + _timeline.getDelay() + ",\n" +
                     "\t\t" + "opacity: {value: " + _timeline.getOpacityValue() + ", duration: " + _timeline.getOpacityDuration() + "},\n" +
                     "\t\t" + "easing: '" + _timeline.getEasing() + "',\n" +
-                    "\t\t" + "complete: function(anim) {\n" +
+                    "\t\t" + "complete: (anime) => {\n" +
                         "\t\t\t" + "hideBalloonText('" + _timeline.getTargets().replace("img", "text") + "');\n" +
                     "\t\t" + "}\n";
                 continue;
@@ -214,8 +214,7 @@ public class WriteTimelineService {
     // /var/www/html/animesign-resources/ にファイル書き出し
     private void writeJavaScript(String animeTimeline) throws IOException {
         FileUtils.writeStringToFile(
-            //new File("../../var/www/html/animesign/resources/scripts/animesign._timeline.js"), // 【重要】FIXME: どこから読むか？
-            new File("/var/www/html/animesign/resources/scripts/animesign.timeline.js"),
+            new File("/var/www/html/animesign/resources/scripts/animesign.timeline.js"), // FIXME: どこから読むか？
             animeTimeline,
             "UTF-8"
         );

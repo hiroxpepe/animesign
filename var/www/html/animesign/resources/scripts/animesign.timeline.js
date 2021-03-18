@@ -1,4 +1,4 @@
-function buildTimeline(basicTimeline) {
+const buildTimeline = (basicTimeline) => {
 	basicTimeline.add({
 	}).add({
 		targets: '#default-background',
@@ -59,7 +59,7 @@ function buildTimeline(basicTimeline) {
 		translateX: {value: -1320, duration: 1000},
 		translateY: {value: 360, duration: 1000},
 		easing: 'easeInOutQuint',
-		complete: function(anim) {
+		complete: (anime) => {
 			showBalloonText('Hello, how are\n you doing?',
 			'#balloon-mid-img-L',
 			'#balloon-mid-text-L',
@@ -75,7 +75,7 @@ function buildTimeline(basicTimeline) {
 		offset: 10000,
 		opacity: {value: 0, duration: 500},
 		easing: 'linear',
-		complete: function(anim) {
+		complete: (anime) => {
 			hideBalloonText('#balloon-mid-text-L');
 		}
 	}).add({
@@ -104,7 +104,7 @@ function buildTimeline(basicTimeline) {
 		translateX: {value: 1320, duration: 1000},
 		translateY: {value: 360, duration: 1000},
 		easing: 'easeInOutQuint',
-		complete: function(anim) {
+		complete: (anime) => {
 			showBalloonText('Hi, Im fine\n thank you.',
 			'#balloon-mid-img-R',
 			'#balloon-mid-text-R',
@@ -115,7 +115,7 @@ function buildTimeline(basicTimeline) {
 		offset: 16000,
 		opacity: {value: 0, duration: 500},
 		easing: 'linear',
-		complete: function(anim) {
+		complete: (anime) => {
 			hideBalloonText('#balloon-mid-text-R');
 		}
 	}).add({
@@ -159,7 +159,7 @@ function buildTimeline(basicTimeline) {
 		easing: 'linear'
 	});
 }
-function initTimeline() {
+const initTimeline = () => {
 	$('#balloon-mid-text-L').html('')
 	$('#balloon-mid-text-L').html('')
 	$('#balloon-mid-text-L').html('')
