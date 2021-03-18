@@ -15,10 +15,69 @@
  */
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-// global functions
+// functions
+
+export const onCreated = () => {
+    // play ボタンは初回非表示
+    $('.play').hide();
+    global.basicTimeline = anime.timeline({
+        loop: 1,
+        autoplay: false,
+        complete: (anime) => {
+            $('.play').css({'background-color': 'darkblue'});
+        }
+    });
+};
+
+export const onBuild = () => {
+    console.log(".build@click");
+    $('.build').css({'background-color': 'lawngreen'});
+    $('.play').hide();
+    // create an ajax object.
+    $.ajax({
+        url: "/animesign" + "/build.json",
+        type: "GET",
+        dataType: "json",
+        success: (data, dataType) => {
+            if (data.isError) {
+                console.log("application error occurred.");
+                return;
+            } else {
+                console.log("write timeline list complete.");
+            }
+
+            // タイムライン構築用 javaScript 再読込 【重要】FIXME: どこから読むか？
+            $.getScript("http://localhost/animesign/resources/scripts/animesign.timeline.js")
+            .done((script, textStatus) => {
+                console.log("reload the timeline javascript complete.");
+
+                // タイムライン構築処理呼び出し
+                buildTimeline(global.basicTimeline);
+
+                // 初期化処理
+                initTimeline();
+
+                $('.build').css({'background-color': 'darkblue'});
+                $('.play').show();
+             })
+             .fail((jqxhr, settings, exception) => {
+                console.log("the timeline javascript request error occurred.");
+             });
+        },
+        error: (XMLHttpRequest, textStatus, errorThrown) => {
+            console.log("http request error occurred.");
+        }
+    });
+};
+
+export const onPlay = () => {
+    console.log(".play@click");
+    global.basicTimeline.restart();
+    $('.play').css({'background-color': 'magenta'});
+};
 
 // 吹き出しテキスト表示用
-const showBalloonText = (text, balloonImgId, balloonTextId, top, left) => {
+export const showBalloonText = (text, balloonImgId, balloonTextId, top, left) => {
     if (top == null) {
         top = 200; // TODO: この値の計算
     }
@@ -70,6 +129,6 @@ const showBalloonText = (text, balloonImgId, balloonTextId, top, left) => {
 };
 
 // 吹き出しテキスト消去用
-const hideBalloonText = (balloonTextId) => {
+export const hideBalloonText = (balloonTextId) => {
     $(balloonTextId).html('');
 };
