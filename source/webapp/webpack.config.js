@@ -9,10 +9,10 @@ module.exports = {
         filename: 'animesign.core.js'
     },
     devtool: 'source-map',
-    // resolve TypeScript and Vue file
+    // resolve TypeScript file
     resolve: {
-        // Add `.ts` and `.vue` as a resolvable extension.
-        extensions: ['.ts', '.vue', '.js', '.html'],
+        // Add `.ts` and 'js' as a resolvable extension.
+        extensions: ['.ts', '.js'],
         alias: {
             vue: 'vue/dist/vue.js'
         }
@@ -30,20 +30,6 @@ module.exports = {
                         }
                     }
                 ]
-            },
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader',
-                options: {
-                    esModule: true
-                }
-            },
-            {
-                test: /\.html$/,
-                loader: 'vue-html-loader',
-                options: {
-                    hmr: false // disables Hot Modules Replacement
-                }
             }
         ]
     }
