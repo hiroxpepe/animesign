@@ -35,7 +35,7 @@ export const onBuild = () => {
     $('.play').hide();
     // create an ajax object.
     $.ajax({
-        url: "/animesign" + "/build.json",
+        url: "/app" + "/build.json",
         type: "GET",
         dataType: "json",
         success: (data, dataType) => {
