@@ -129,7 +129,7 @@
 
     <build>
         <!-- path at the jetty container on docker. -->
-        <finalName>animesign</finalName>
+        <finalName>app</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

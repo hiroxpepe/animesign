@@ -24,5 +24,6 @@ services:
     depends_on:
       - jetty
     volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
       - ../var/www/html:/usr/share/nginx/html
     container_name: animesign_nginx
