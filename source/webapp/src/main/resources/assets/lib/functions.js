@@ -47,7 +47,7 @@ export const onBuild = () => {
             }
 
             // タイムライン構築用 javaScript 再読込 【重要】FIXME: どこから読むか？
-            $.getScript("http://localhost/animesign/resources/scripts/animesign.timeline.js")
+            $.getScript("http://localhost/resources/scripts/animesign.timeline.js")
             .done((script, textStatus) => {
                 console.log("reload the timeline javascript complete.");
 

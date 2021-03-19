@@ -3,31 +3,31 @@ const buildTimeline = (basicTimeline) => {
 	}).add({
 		targets: '#default-background',
 		offset: 0,
-		src: 'http://localhost/animesign/resources/images/backgrounds/background_0_1920px_1080px.png',
+		src: 'http://localhost/resources/images/backgrounds/background_0_1920px_1080px.png',
 		duration: 0,
 		easing: 'linear'
 	}).add({
 		targets: '#default-background',
 		offset: 1000,
-		src: 'http://localhost/animesign/resources/images/backgrounds/background_start_3_red_1920px_1080px.png',
+		src: 'http://localhost/resources/images/backgrounds/background_start_3_red_1920px_1080px.png',
 		duration: 0,
 		easing: 'linear'
 	}).add({
 		targets: '#default-background',
 		offset: 2000,
-		src: 'http://localhost/animesign/resources/images/backgrounds/background_start_2_green_1920px_1080px.png',
+		src: 'http://localhost/resources/images/backgrounds/background_start_2_green_1920px_1080px.png',
 		duration: 0,
 		easing: 'linear'
 	}).add({
 		targets: '#default-background',
 		offset: 3000,
-		src: 'http://localhost/animesign/resources/images/backgrounds/background_start_1_blue_1920px_1080px.png',
+		src: 'http://localhost/resources/images/backgrounds/background_start_1_blue_1920px_1080px.png',
 		duration: 0,
 		easing: 'linear'
 	}).add({
 		targets: '#default-background',
 		offset: 4000,
-		src: 'http://localhost/animesign/resources/images/backgrounds/background_0_1920px_1080px.png',
+		src: 'http://localhost/resources/images/backgrounds/background_0_1920px_1080px.png',
 		duration: 0,
 		easing: 'linear'
 	}).add({

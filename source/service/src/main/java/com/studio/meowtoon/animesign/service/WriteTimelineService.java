@@ -211,10 +211,10 @@ public class WriteTimelineService {
         return "";
     }
 
-    // /var/www/html/animesign-resources/ にファイル書き出し
+    // /var/www/html/resources/ にファイル書き出し
     private void writeJavaScript(String animeTimeline) throws IOException {
         FileUtils.writeStringToFile(
-            new File("/var/www/html/animesign/resources/scripts/animesign.timeline.js"), // FIXME: どこから読むか？
+            new File("/var/www/html/resources/scripts/animesign.timeline.js"), // FIXME: どこから読むか？
             animeTimeline,
             "UTF-8"
         );
