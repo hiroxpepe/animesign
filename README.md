@@ -39,7 +39,7 @@ Creating animesign_nginx ... done
 ```
 
 - check if it can access and to the next step.  
-http://localhost/app/index.html
+http://localhost/app
 
 You may get an error page because Jetty is not ready to start up soon, so please wait a minute.
 
