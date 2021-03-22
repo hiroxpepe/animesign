@@ -1,6 +1,6 @@
 # AnimeSign
 ## Motion Comic Generator for a Web browser.
-![game image](https://i.imgur.com/MLwz2nx.png)
+![game image](https://i.imgur.com/auwRGzK.png)
 
 ## Overview
 It's a Web application that displays like a motion comic animation on the Web browser.
@@ -16,6 +16,8 @@ It's a Web application that displays like a motion comic animation on the Web br
 - Docker
 
 ## How to build.
+#### build the app by using npm and maven.
+
 ```sh
 $ cd PathToThisREADME.md
 $ cd source/webapp
@@ -27,6 +29,7 @@ $ mvn install
 
 ## How to run.
 #### run the web server and the app server via docker.
+
 ```sh
 $ cd PathToThisREADME.md
 $ cd docker
@@ -34,18 +37,16 @@ $ docker-compose up -d
 Creating animesign_jetty ... done
 Creating animesign_nginx ... done
 ```
-- check if it can access.  
-http://localhost/index.html  
 
 - check if it can access and to the next step.  
-http://localhost:8080/animesign/
+http://localhost/app
+
+You may get an error page because Jetty is not ready to start up soon, so please wait a minute.
 
 ## How to play the AnimeSign app.
-- press the **build** button on the upper left of the screen.
-- press the **play** button on the upper left of the screen.
-
-## How to deploy to the other environment as a docker image.
-- TBA
++ press the **build** button on the upper left of the screen.
++ wait some seconds until show the **play** button.
++ press the **play** button then the comic will be started.
 
 ## License
-It's released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
++ [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
